@@ -9,7 +9,7 @@ The main reason why I chose this project is because it is something I would enjo
 The tech stack of the project is as follows:
 - TypeScript (To add type annotations on top of vanilla JS)
 - Node.js (To process server-side requests)
-- Fauna (To store the fastest times)
+- Fauna/Replit (To store the fastest times)
   
 ## **Development Plans**
 
@@ -25,7 +25,7 @@ Finally, the view is just composed of the HTML and CSS.
 
 ### ***Other Features***
 1. I plan to save the user's progress using localStorage with JSON.stringify.
-2. I plan to use Fauna to show the fastest times that people have achieved on the game. The leaderboard will only include those who got the good ending of the game.
+2. I plan to use Fauna/Replit to show the fastest times that people have achieved on the game. The leaderboard will only include those who got the good ending of the game.
 3. I plan to validate the user's input for some of the questions. For instance, I can trim the raw input and convert it to lower case to make it case insensitive.
 
 ## **Plot Summary**
@@ -50,6 +50,25 @@ For those who do not know who [Eve](https://en.wikipedia.org/wiki/Eve_(Japanese_
 1. **Still Underground**. The title to the game is a reference to Eve's song [We're still Underground](https://www.youtube.com/watch?v=nBteO-bU78Y).
 2. **Eve's Basement**. There is an inside joke in the community that Eve keeps his animators trapped inside his basement. The game is based on this concept.
 3. **Falling into a Hole on a Mountain**. This is not an Eve reference and is instead an Undertale reference. In Undertale, the protagonist, Frisk, falls into a hole on Mt. Ebbot.
+
+## **Planned Pages**
+
+### **/**
+
+This is the home page. Here, the user can choose to continue their game or start a new game.
+
+### **/intro**
+
+This is where the user will choose their user name. They will also be informed about some game mechanics (eg., how we will calculate the amount of time they took to finish the game).
+
+### **/game**
+
+This is the main page where the game will occur. I will use JavaScript to dynamically update the contents of the page based on the user's progress
+
+### **/leaderboard**
+
+Here, the user will see the top 10 fastest players as well as their own ranking. The time taken to finish the game will be computed by storing the time at which the player started the game in localStorage. Then, once the player finishes the game, we can compute the time as `Date.now() - timeStarted`.
+
 ## **Sample Questions**
 
 Note that every HTML snippet will be put inside a form element.
