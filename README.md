@@ -99,5 +99,5 @@ Note that every HTML snippet will be put inside a form element.
 ```HTML
     <input type="text" placeholder="Name of the festival">
     
-    <input type="text" placeholder="The year it occured">
+    <input type="number" placeholder="The year it occured">
 ```
