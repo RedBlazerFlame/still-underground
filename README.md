@@ -52,7 +52,7 @@ For those who do not know who [Eve](https://en.wikipedia.org/wiki/Eve_(Japanese_
 3. **Falling into a Hole on a Mountain**. This is not an Eve reference and is instead an Undertale reference. In Undertale, the protagonist, Frisk, falls into a hole on Mt. Ebbot.
 ## **Sample Questions**
 
-Note that each of the HTML snippets will be put inside a form element.
+Note that every HTML snippet will be put inside a form element.
 
 ### ***Easy***
 
@@ -78,13 +78,13 @@ Note that each of the HTML snippets will be put inside a form element.
         <option>Bubble</option>
     </select>
 ```
-2. What is the name of the boy from *Inochi no Tabekata*? Give his full name, and only include one space between words.
+1. What is the name of the boy from *Inochi no Tabekata*? Give his full name and include only one space between words. Input your answer in Romaji (i.e. using English characters).
 ```HTML
    <input type="text" placeholder="Full name of the boy">
 ```
 ### ***Hard***
 
-1. Eve sang with another artist in at least one song of each of these albums *except for*:
+1. In which of these albums did Eve sing all of the songs on his own?
     
 ```HTML
     <select>
