@@ -52,42 +52,52 @@ For those who do not know who [Eve](https://en.wikipedia.org/wiki/Eve_(Japanese_
 3. **Falling into a Hole on a Mountain**. This is not an Eve reference and is instead an Undertale reference. In Undertale, the protagonist, Frisk, falls into a hole on Mt. Ebbot.
 ## **Sample Questions**
 
+Note that each of the HTML snippets will be put inside a form element.
+
 ### ***Easy***
 
 1. Which Eve song has the most listens on Spotify?
 
+```HTML
     <select>
         <option>Dramaturgy</option>
         <option>Anoko Secret</option>
         <option>Kaikai Kitan</option>
         <option>Okinimesumama</option>
     </select>
+```
 
 ### ***Medium***
 
 1. Which of these songs is the opening of the anime *Mecha-ude*?
-
+```HTML
     <select>
         <option>Ambivalent</option>
         <option>Yamiyo</option>
         <option>Leo</option>
         <option>Bubble</option>
     </select>
+```
 2. What is the name of the boy from *Inochi no Tabekata*? Give his full name, and only include one space between words.
-
+```HTML
    <input type="text" placeholder="Full name of the boy">
+```
 ### ***Hard***
 
 1. Eve sang with another artist in at least one song of each of these albums *except for*:
     
+```HTML
     <select>
         <option>Oyasumi</option>
         <option>Kaizin</option>
         <option>Blue</option>
         <option>Otogi</option>
     </select>
+```
 2. Eve sang the song *World Domination* with other popular artists. In which festival did Eve sing this song? In what year did this festival occur? Do not include spaces.
 
+```HTML
     <input type="text" placeholder="Name of the festival">
     
     <input type="text" placeholder="The year it occured">
+```
