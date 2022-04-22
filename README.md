@@ -53,21 +53,25 @@ For those who do not know who [Eve](https://en.wikipedia.org/wiki/Eve_(Japanese_
 
 ## **Planned Pages**
 
-### **/**
+### ***/***
 
 This is the home page. Here, the user can choose to continue their game or start a new game.
 
-### **/intro**
+### ***/intro***
 
 This is where the user will choose their user name. They will also be informed about some game mechanics (eg., how we will calculate the amount of time they took to finish the game).
 
-### **/game**
+### ***/game***
 
 This is the main page where the game will occur. I will use JavaScript to dynamically update the contents of the page based on the user's progress
 
-### **/leaderboard**
+### ***/leaderboard***
 
 Here, the user will see the top 10 fastest players as well as their own ranking. The time taken to finish the game will be computed by storing the time at which the player started the game in localStorage. Then, once the player finishes the game, we can compute the time as `Date.now() - timeStarted`.
+
+## **Link to the Draft of the Story**
+
+[https://pond-aardwolf-200.notion.site/Story-Planning-b98eb32003784ef2a3a6f583679773c2](https://pond-aardwolf-200.notion.site/Story-Planning-b98eb32003784ef2a3a6f583679773c2)
 
 ## **Sample Questions**
 
