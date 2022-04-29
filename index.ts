@@ -1,6 +1,15 @@
 // Imports
+import "./scripts/setup-dotenv.js";
 import express from "express";
 import http from "http";
+import {
+    goodEndingTimesGet,
+    goodEndingTimesPost,
+} from "./handlers/good-ending-times.js";
+import {
+    neutralEndingTimesGet,
+    neutralEndingTimesPost,
+} from "./handlers/neutral-ending-times.js";
 
 // Declaring Constants
 const ROOT = "src";
@@ -15,19 +24,18 @@ const httpServer = http.createServer(app);
 app.use(express.json());
 
 // API Routes
-app.post("/api/test/", (req, res) => {
-    console.log(req.body);
-    if (req.body?.secret === "Hikifes2019") {
-        res.json({
-            ...req.body,
-            message: "You found the hidden message",
-            purpose:
-                "This is just a test route to see if the backend is working",
-        });
-    } else {
-        res.json(req.body);
-    }
-});
+
+/// Post a new entry to the good ending table
+app.post("/api/good-ending-times", goodEndingTimesPost);
+
+/// Gets the top 10 times (good)
+app.get("/api/good-ending-times", goodEndingTimesGet);
+
+/// Post a new entry to the neutral ending table
+app.post("/api/neutral-ending-times", neutralEndingTimesPost);
+
+/// Gets the top 10 times (neutral)
+app.get("/api/neutral-ending-times", neutralEndingTimesGet);
 
 // Static File Serving
 app.use(express.static(ROOT));
