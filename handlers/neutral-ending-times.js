@@ -34,7 +34,7 @@ export const neutralEndingTimesGet = (req, res) => __awaiter(void 0, void 0, voi
         size: 10,
     }))
         .catch((e) => res.status(500).json({
-        error: "An unexpected error occured while creating the document",
+        error: "An unexpected error occured while fetching the documents",
         details: e,
     }));
     res.json(docs);
