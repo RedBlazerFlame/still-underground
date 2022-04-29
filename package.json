@@ -1,0 +1,29 @@
+{
+  "name": "still-underground",
+  "version": "1.0.0",
+  "description": "The main reason why I chose this project is because it is something I would enjoy working on. Additionally, it wouldn't be too hard to implement.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedBlazerFlame/still-underground.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RedBlazerFlame/still-underground/issues"
+  },
+  "homepage": "https://github.com/RedBlazerFlame/still-underground#readme",
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.15"
+  }
+}
