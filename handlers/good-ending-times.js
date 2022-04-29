@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { client, Collection, Create, Index, Match, Paginate, } from "../scripts/fauna.js";
+import { client, Collection, Create, Get, Index, Match, Paginate, Ref, } from "../scripts/fauna.js";
 import { isTimeRecord } from "../scripts/timeRecord.js";
 export const goodEndingTimesPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let data = req.body;
@@ -27,15 +27,30 @@ export const goodEndingTimesPost = (req, res) => __awaiter(void 0, void 0, void 
     res.json(doc);
 });
 export const goodEndingTimesGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let data = req.body;
-    // TODO Handle the case where an id is included
-    const docs = yield client
-        .query(Paginate(Match(Index("good-ending-times-asc")), {
-        size: 10,
-    }))
-        .catch((e) => res.status(500).json({
-        error: "An unexpected error occured while fetching the documents",
-        details: e,
-    }));
-    res.json(docs);
+    let { id } = req.body;
+    if (typeof id !== "string" || id.length >= 256) {
+        const docs = yield client
+            .query(Paginate(Match(Index("good-ending-times-asc")), {
+            size: 10,
+        }))
+            .catch((e) => res.status(500).json({
+            error: "An unexpected error occured while fetching the documents",
+            details: e,
+        }));
+        res.json(docs);
+    }
+    else {
+        let doc;
+        try {
+            doc = yield client.query(Get(Ref(Collection("good-ending-times"), id)));
+        }
+        catch (e) {
+            res.status(404).json({
+                error: `An unexpected error occured while fetching the document "${id}"`,
+                details: e,
+            });
+            return;
+        }
+        res.json(doc);
+    }
 });

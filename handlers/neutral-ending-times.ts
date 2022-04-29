@@ -6,6 +6,8 @@ import {
     Index,
     Match,
     Paginate,
+    Get,
+    Ref,
 } from "../scripts/fauna.js";
 import { isTimeRecord } from "../scripts/timeRecord.js";
 
@@ -33,21 +35,37 @@ export const neutralEndingTimesPost: RequestHandler = async (req, res) => {
 };
 
 export const neutralEndingTimesGet: RequestHandler = async (req, res) => {
-    let data = req.body;
+    let { id } = req.body;
 
-    // TODO Handle the case where an id is included
-    const docs = await client
-        .query(
-            Paginate(Match(Index("neutral-ending-times-asc")), {
-                size: 10,
-            })
-        )
-        .catch((e) =>
-            res.status(500).json({
-                error: "An unexpected error occured while fetching the documents",
+    if (typeof id !== "string" || id.length >= 256) {
+        const docs = await client
+            .query(
+                Paginate(Match(Index("neutral-ending-times-asc")), {
+                    size: 10,
+                })
+            )
+            .catch((e) =>
+                res.status(500).json({
+                    error: "An unexpected error occured while fetching the documents",
+                    details: e,
+                })
+            );
+
+        res.json(docs);
+    } else {
+        let doc;
+        try {
+            doc = await client.query(
+                Get(Ref(Collection("neutral-ending-times"), id))
+            );
+        } catch (e) {
+            res.status(404).json({
+                error: `An unexpected error occured while fetching the document "${id}"`,
                 details: e,
-            })
-        );
+            });
+            return;
+        }
 
-    res.json(docs);
+        res.json(doc);
+    }
 };
