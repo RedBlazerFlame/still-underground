@@ -44,7 +44,7 @@ export const goodEndingTimesGet: RequestHandler = async (req, res) => {
         )
         .catch((e) =>
             res.status(500).json({
-                error: "An unexpected error occured while creating the document",
+                error: "An unexpected error occured while fetching the documents",
                 details: e,
             })
         );
