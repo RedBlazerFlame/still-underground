@@ -1,5 +1,4 @@
 "use strict";
-// Imports
 // Declaring Constants and Variables
 const hasSave = localStorage.getItem("save") !== null;
 // Getting a Reference to HTML Elements

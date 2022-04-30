@@ -9,6 +9,6 @@
         "moduleResolution": "node",
         "esModuleInterop": false,
         "allowSyntheticDefaultImports": true,
-        "lib": ["ESNext", "DOM"]
+        "lib": ["ESNext", "DOM", "DOM.Iterable"]
     }
 }

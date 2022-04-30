@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta Tags -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Gabee De Vera" />
+        <meta
+            name="description"
+            content="Here, you can choose a name for your character"
+        />
+        <meta name="keywords" content="K, potassium, computer science" />
+        <meta name="date" content="30/04/2022" />
+        <meta name="revised" content="30/04/2022" />
+
+        <!-- Scripts -->
+        <script type="module" src="/scripts/global.js" defer></script>
+        <script type="module" src="/scripts/intro.js" defer></script>
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="/styles/intro.css" />
+        <link rel="stylesheet" href="/styles/global.css" />
+
+        <title>Still Underground | Intro</title>
+    </head>
+    <body>
+        <main class="window">
+            <section class="title centered h1">Name Your Character</section>
+            <section class="inputs centered h2">
+                <form id="inputs">
+                    <textarea
+                        name="nameInput"
+                        form="inputs"
+                        id="nameInput"
+                        placeholder="Name"
+                        class="textarea hoverable noresize"
+                        cols="30"
+                        rows="1"
+                    ></textarea>
+                    <p class="inputIndicator hidden" id="nameInputIndicator">
+                        Error
+                    </p>
+                </form>
+            </section>
+            <section class="disclaimer centered">
+                <i
+                    >Disclaimer: This game is a work of fiction. The basement
+                    likely does not exist in real life.</i
+                >
+            </section>
+            <section class="startGame centered">
+                <form id="controls">
+                    <input
+                        type="button"
+                        name="mainMenuButton"
+                        value="Back to the Main Menu"
+                        class="button hoverable"
+                        id="mainMenuButton"
+                        form="controls"
+                    />
+                    <input
+                        type="button"
+                        name="startGameButton"
+                        value="Begin the Game"
+                        class="button hoverable"
+                        id="startGameButton"
+                        form="controls"
+                    />
+                </form>
+            </section>
+        </main>
+    </body>
+</html>

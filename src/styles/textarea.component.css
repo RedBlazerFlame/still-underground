@@ -1,0 +1,25 @@
+.textarea {
+    background-color: black;
+    border: 4px solid white;
+    color: white;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.textarea::placeholder {
+    color: #aeaeae;
+}
+
+.textarea.noresize {
+    resize: none;
+}
+
+.textarea.hoverable:hover {
+    border-color: yellow;
+}
+
+.textarea:focus, .textarea.hoverable:focus {
+    border-color: orange;
+    outline: none;
+}

@@ -1,0 +1,17 @@
+.inputIndicator {
+    font-size: 1rem;
+    margin: 4px;
+    visibility: visible;
+}
+
+.inputIndicator.error {
+    color: red;
+}
+
+.inputIndicator.ok {
+    color: lime;
+}
+
+.inputIndicator.hidden {
+    visibility: hidden;
+}

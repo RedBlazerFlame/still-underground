@@ -1,0 +1,33 @@
+/* Creating the Layout of the Page */
+.window {
+    padding: 12px;
+
+    height: 100vh;
+
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 6fr 1fr 1fr;
+    grid-template-areas:
+    "title"
+    "inputs"
+    "disclaimer"
+    "startGame";
+}
+
+/* Main Styles */
+.title {
+    grid-area: title;
+}
+
+.inputs {
+    grid-area: inputs;
+}
+
+.disclaimer {
+    grid-area: disclaimer;
+}
+
+.startGame {
+    grid-area: startGame;
+}

@@ -1,5 +1,3 @@
-// Imports
-
 // Declaring Constants and Variables
 const hasSave = localStorage.getItem("save") !== null;
 

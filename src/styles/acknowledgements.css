@@ -1,7 +1,9 @@
+/* Main Window */
 .window {
     padding: 12px;
 }
 
+/* Other Styles */
 .header img {
     max-width: 70vw;
 }
