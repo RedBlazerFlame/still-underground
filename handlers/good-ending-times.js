@@ -27,7 +27,7 @@ export const goodEndingTimesPost = (req, res) => __awaiter(void 0, void 0, void 
     res.json(doc);
 });
 export const goodEndingTimesGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let { id } = req.body;
+    let { id } = req.params;
     if (typeof id !== "string" || id.length >= 256) {
         const docs = yield client
             .query(Paginate(Match(Index("good-ending-times-asc")), {

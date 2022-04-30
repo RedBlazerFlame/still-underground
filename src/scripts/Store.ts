@@ -1,3 +1,5 @@
+// The Store object automatically saves the data to localStorage whenever the state changes
+
 export class Store<T extends Object> {
     // Properties
     data: T;
@@ -5,19 +7,23 @@ export class Store<T extends Object> {
 
     // Methods
     public load() {
+        // Get the raw data from localStorage, if it exists
         let raw = localStorage.getItem(this.key);
 
         if (raw === null) {
+            // The raw data does not exist; save the existing data onto localStorage
             this.save();
             return;
         }
 
+        // The raw data exists. Set the data of the object to the data in localStorage
         this.set(JSON.parse(raw));
 
         return;
     }
 
     public set(newObj: T) {
+        // Since the object reference changes, we need to recreate the proxy
         this.data = new Proxy(newObj, {
             set: (o, p, v, r) => {
                 let res = Reflect.set(o, p, v, r);
@@ -26,6 +32,7 @@ export class Store<T extends Object> {
             },
         });
 
+        // Save the new data into localStorage
         this.save();
     }
 

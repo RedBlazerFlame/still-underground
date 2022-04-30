@@ -35,7 +35,7 @@ export const goodEndingTimesPost: RequestHandler = async (req, res) => {
 };
 
 export const goodEndingTimesGet: RequestHandler = async (req, res) => {
-    let { id } = req.body;
+    let { id } = req.params;
 
     if (typeof id !== "string" || id.length >= 256) {
         const docs = await client

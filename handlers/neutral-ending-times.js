@@ -27,7 +27,8 @@ export const neutralEndingTimesPost = (req, res) => __awaiter(void 0, void 0, vo
     res.json(doc);
 });
 export const neutralEndingTimesGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let { id } = req.body;
+    let { id } = req.params;
+    console.log(id);
     if (typeof id !== "string" || id.length >= 256) {
         const docs = yield client
             .query(Paginate(Match(Index("neutral-ending-times-asc")), {

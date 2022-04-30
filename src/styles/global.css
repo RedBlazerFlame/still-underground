@@ -52,10 +52,24 @@
     align-items: center;
 }
 
+.centered-horizontally {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .stretched {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
+}
+
+.stretched-horizontally {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: stretch;
 }
 

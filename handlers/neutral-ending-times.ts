@@ -35,7 +35,9 @@ export const neutralEndingTimesPost: RequestHandler = async (req, res) => {
 };
 
 export const neutralEndingTimesGet: RequestHandler = async (req, res) => {
-    let { id } = req.body;
+    let { id } = req.params;
+
+    console.log(id);
 
     if (typeof id !== "string" || id.length >= 256) {
         const docs = await client

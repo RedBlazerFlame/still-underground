@@ -3,7 +3,7 @@
 .table {
     --header-row-bgcolor: white;
     --header-row-color: black;
-    --highlight-row-bgcolor: #00aa00;
+    --highlight-row-bgcolor: #ff0000;
     --highlight-row-color: white;
     --hover-row-bgcolor: #404040;
     --hover-row-color: white;
