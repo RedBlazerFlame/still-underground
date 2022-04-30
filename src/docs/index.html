@@ -12,13 +12,51 @@
         <meta name="revised" content="29/04/2022" />
 
         <!-- Scripts -->
+        <script type="module" src="/scripts/global.js" defer></script>
+        <script type="module" src="/scripts/home.js" defer></script>
 
         <!-- Styles -->
         <link rel="stylesheet" href="/styles/global.css" />
+        <link rel="stylesheet" href="/styles/home.css" />
 
         <title>Still Underground</title>
     </head>
     <body>
-        Placeholder
+        <main class="window">
+            <section class="icon centered">
+                <img src="images/icon.png" alt="" />
+            </section>
+            <section class="title h1 centered">
+                <img src="images/logo.png" alt="Still Underground" />
+            </section>
+            <section class="options h2 centered">
+                <form class="centered-and-spaced-between">
+                    <input
+                        type="button"
+                        id="newGame"
+                        value="New Game"
+                        class="button hoverable"
+                    />
+                    <input
+                        type="button"
+                        id="continue"
+                        value="Continue"
+                        class="button hoverable nodisplay"
+                    />
+                    <input
+                        type="button"
+                        id="leaderboard"
+                        value="Leaderboard"
+                        class="button hoverable"
+                    />
+                    <input
+                        type="button"
+                        id="acknowledgements"
+                        value="Acknowledgements"
+                        class="button hoverable"
+                    />
+                </form>
+            </section>
+        </main>
     </body>
 </html>

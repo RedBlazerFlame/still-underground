@@ -1,0 +1,17 @@
+.button {
+    background-color: transparent;
+    border: 4px solid white;
+    color: white;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+}
+
+.button.hoverable:hover {
+    border-color: yellow;
+    color: yellow;
+}
+
+.button:focus, .button.hoverable:focus {
+    border-color: orange;
+    color: orange;
+}

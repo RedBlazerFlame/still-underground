@@ -5,6 +5,7 @@
 /* Component-scoped Style Imports */
 
 @import "table.component.css";
+@import "button.component.css";
 
 /* Styles for All Elements */
 
@@ -59,6 +60,13 @@
     align-items: center;
 }
 
+.centered-and-spaced-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .stretched {
     display: flex;
     flex-direction: column;
@@ -95,4 +103,8 @@
 
 .h6, h6 {
     font-size: 0.75rem;
+}
+
+.nodisplay {
+    display: none;
 }
