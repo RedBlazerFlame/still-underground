@@ -1,0 +1,65 @@
+/* CSS Variables and Styles */
+
+.table {
+    --header-row-bgcolor: white;
+    --header-row-color: black;
+    --highlight-row-bgcolor: #00aa00;
+    --highlight-row-color: white;
+    --hover-row-bgcolor: #404040;
+    --hover-row-color: white;
+    --row-bgcolor-1: #303030;
+    --row-bgcolor-2: #202020;
+    --row-color: white;
+    --border-color: black;
+
+    border-collapse: collapse;
+}
+
+/* Styles */
+
+.table > caption {
+    font-size: 1.5rem;
+}
+
+/* Table Rows */
+
+.table tr {
+    color: var(--row-color, black)
+}
+
+.table tr:nth-of-type(2n) {
+    background-color: var(--row-bgcolor-1, #303030);
+}
+
+.table tr:nth-of-type(2n + 1) {
+    background-color: var(--row-bgcolor-2, #202020);
+}
+
+.table tr:first-of-type {
+    background-color: var(--header-row-bgcolor, white);
+    color: var(--header-row-color, black);
+}
+
+.table tr.highlighted {
+    background-color: var(--highlight-row-bgcolor, white);
+    color: var(--highlight-row-color, black);
+}
+
+.table tr.heavy-top-border {
+    border-top-width: 3px;
+}
+
+.table tr.heavy-bottom-border {
+    border-bottom-width: 3px;
+}
+
+.table.hoverable tr:not(:first-of-type,.highlighted):hover {
+    background-color: var(--hover-row-bgcolor, #00aaff);
+    color: var(--hover-row-color, white);
+}
+
+/* Table Cells */
+.table td, .table tr {
+    border-top: 1px solid var(--border-color, black);
+    border-bottom: 1px solid var(--border-color, black);
+}

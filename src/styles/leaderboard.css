@@ -1,0 +1,45 @@
+/* Main Window */
+.window {
+    padding: 12px;
+
+    height: 100vh;
+
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr 12fr;
+    grid-template-areas:
+    "title title"
+    "pageName pageName"
+    "goodEndingTimes neutralEndingTimes";
+}
+
+/* Grid Children */
+.title {
+    grid-area: title;
+}
+
+.title > img {
+    max-width: 50vw;
+}
+
+.pageName {
+    grid-area: pageName;
+}
+
+.goodEndingTimes {
+    grid-area: goodEndingTimes;
+
+    padding: 12px;
+}
+
+.neutralEndingTimes {
+    grid-area: neutralEndingTimes;
+
+    padding: 12px;
+}
+
+/* Tables */
+.table tr > td {
+    text-align: center;
+}

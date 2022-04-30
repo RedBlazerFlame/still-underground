@@ -1,0 +1,84 @@
+/* Font Imports */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=VT323&display=swap');
+
+/* Component-scoped Style Imports */
+
+@import "table.component.css";
+
+/* Styles for All Elements */
+
+* {
+    box-sizing: border-box;
+}
+
+/* CSS Variables and Body Styling */
+
+:root, body {
+    background-color: black;
+    color: white;
+
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+
+    margin: 0;
+    padding: 0;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+    :root, body {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root, body {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    :root, body {
+        font-size: 10px;
+    }
+}
+
+/* Reusable Classes */
+.centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stretched {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.h1, h1 {
+    font-size: 3rem;
+}
+
+.h2, h2 {
+    font-size: 2rem;
+}
+
+.h3, h3 {
+    font-size: 1.5rem;
+}
+
+.h4, h4 {
+    font-size: 1.25rem;
+}
+
+.h5, h5 {
+    font-size: 1rem;
+}
+
+.h6, h6 {
+    font-size: 0.75rem;
+}
