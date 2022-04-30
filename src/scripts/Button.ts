@@ -2,7 +2,7 @@
 
 {
     let buttons: NodeListOf<HTMLElement> = document.querySelectorAll(
-        "button, input[type=Button]"
+        "button, input[type=button]"
     );
     buttons.forEach((button) => {
         button.addEventListener("click", (ev) => {

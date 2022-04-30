@@ -12,6 +12,7 @@ import bestTimeStore from "./bestTimeStore.js";
 // Getting a Reference to HTML elements
 const goodTableBody = document.querySelector("#goodTable tbody");
 const neutralTableBody = document.querySelector("#neutralTable tbody");
+const mainMenuButton = document.getElementById("mainMenuButton");
 // Helper Functions
 function prependLeadingZeroes(s, len) {
     let stringLength = s.length;
@@ -29,11 +30,15 @@ function formatAsTimeString(t) {
     if (totalDays > 0)
         res += `${prependLeadingZeroes(`${totalDays}`, 3)} : `;
     if (totalHours > 0)
-        res += `${prependLeadingZeroes(`${totalHours}`, 2)} : `;
-    res += `${prependLeadingZeroes(`${totalMinutes}`, 2)} : `;
+        res += `${prependLeadingZeroes(`${hours}`, 2)} : `;
+    res += `${prependLeadingZeroes(`${minutes}`, 2)} : `;
     res += `${prependLeadingZeroes(`${seconds}`, 2)}`;
     return res;
 }
+// Attaching event listeners
+mainMenuButton === null || mainMenuButton === void 0 ? void 0 : mainMenuButton.addEventListener("click", (ev) => {
+    window.location.replace("/");
+});
 // Fetch the Leaderboard Data
 (() => __awaiter(void 0, void 0, void 0, function* () {
     // Fetching the top 10 good ending times, the top 10 bad ending times, and the user's best times

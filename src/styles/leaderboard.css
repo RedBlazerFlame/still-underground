@@ -7,11 +7,12 @@
     display: -ms-grid;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 1fr 12fr;
+    grid-template-rows: 2fr 1fr 12fr 1fr;
     grid-template-areas:
     "title title"
     "pageName pageName"
-    "goodEndingTimes neutralEndingTimes";
+    "goodEndingTimes neutralEndingTimes"
+    "returnToMainMenu returnToMainMenu";
 }
 
 /* Grid Children */
@@ -37,6 +38,10 @@
     grid-area: neutralEndingTimes;
 
     padding: 12px;
+}
+
+.returnToMainMenu {
+    grid-area: returnToMainMenu;
 }
 
 /* Tables */

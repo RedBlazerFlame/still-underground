@@ -6,6 +6,7 @@ const goodTableBody = document.querySelector("#goodTable tbody") as HTMLElement;
 const neutralTableBody = document.querySelector(
     "#neutralTable tbody"
 ) as HTMLElement;
+const mainMenuButton = document.getElementById("mainMenuButton");
 
 // Helper Functions
 function prependLeadingZeroes(s: string, len: number): string {
@@ -27,12 +28,17 @@ function formatAsTimeString(t: number) {
     let res = "";
 
     if (totalDays > 0) res += `${prependLeadingZeroes(`${totalDays}`, 3)} : `;
-    if (totalHours > 0) res += `${prependLeadingZeroes(`${totalHours}`, 2)} : `;
-    res += `${prependLeadingZeroes(`${totalMinutes}`, 2)} : `;
+    if (totalHours > 0) res += `${prependLeadingZeroes(`${hours}`, 2)} : `;
+    res += `${prependLeadingZeroes(`${minutes}`, 2)} : `;
     res += `${prependLeadingZeroes(`${seconds}`, 2)}`;
 
     return res;
 }
+
+// Attaching event listeners
+mainMenuButton?.addEventListener("click", (ev) => {
+    window.location.replace("/");
+});
 
 // Fetch the Leaderboard Data
 (async () => {
