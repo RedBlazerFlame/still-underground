@@ -26,6 +26,11 @@
     padding: 0;
 }
 
+/* Other Styles */
+a {
+    color: white;
+}
+
 /* Media Queries */
 @media screen and (max-width: 1024px) {
     :root, body {
@@ -46,6 +51,11 @@
 }
 
 /* Reusable Classes */
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .centered {
     display: flex;
     flex-direction: column;
@@ -90,6 +100,14 @@
 
 .bottom-left-aligned > * {
     width: max-content;
+}
+
+.center-self {
+    align-self: center;
+}
+
+.max-width-20vw {
+    max-width: 20vw;
 }
 
 .h1, h1 {
