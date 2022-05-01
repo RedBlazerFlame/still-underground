@@ -30,7 +30,7 @@ export class AsyncDelayer {
 }
 export const delayer = new AsyncDelayer();
 // This will allow us to display text gradually
-export function displayAsynchronously({ e, text, delay: s, useDomAPI = true, }) {
+export function displayAsynchronously({ e, text, delay: s, useDomAPI = false, }) {
     return __awaiter(this, void 0, void 0, function* () {
         if (s == 0) {
             useDomAPI
@@ -58,7 +58,7 @@ export class AsyncTextDisplayer {
     }
     // This will display text and elements asynchronously
     // It allows text to gradually appear on the screen
-    displayAsynchronously({ e, text, delay: s, useDomAPI = true, }) {
+    displayAsynchronously({ e, text, delay: s, useDomAPI = false, }) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield displayAsynchronously({
                 e,

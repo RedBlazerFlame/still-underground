@@ -131,11 +131,9 @@ const main: EventHandler = async function (game: GameObject) {
         game.view.controls.addEventListener("submit", (ev) => {
             // TODO animating-room-1
 
-            console.log("visited");
-
-            // game.dispatcher.dispatch({
-            //     event: "animating-room-1",
-            // });
+            game.dispatcher.dispatch({
+                event: "animating-room-1",
+            });
             r(undefined);
         });
 

@@ -100,10 +100,9 @@ const main = function (game) {
         yield new Promise((r) => {
             game.view.controls.addEventListener("submit", (ev) => {
                 // TODO animating-room-1
-                console.log("visited");
-                // game.dispatcher.dispatch({
-                //     event: "animating-room-1",
-                // });
+                game.dispatcher.dispatch({
+                    event: "animating-room-1",
+                });
                 r(undefined);
             });
             game.view.navigator.previousAddEventListener("click", (ev) => {

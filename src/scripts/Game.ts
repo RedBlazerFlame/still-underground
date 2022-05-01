@@ -107,7 +107,7 @@ export class NavigatorController extends ElementController<HTMLFormElement> {
     }
 
     public nextRemoveEventListeners() {
-        while (this.prevEventListeners.length > 0) {
+        while (this.nextEventListeners.length > 0) {
             let curEventListener =
                 this.nextEventListeners.pop() as EventListenerArgs;
             this.nextButton.removeEventListener(...curEventListener);

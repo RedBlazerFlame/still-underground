@@ -35,7 +35,7 @@ export async function displayAsynchronously({
     e,
     text,
     delay: s,
-    useDomAPI = true,
+    useDomAPI = false,
 }: {
     e: HTMLElement;
     text: string;
@@ -70,7 +70,7 @@ export class AsyncTextDisplayer {
         e,
         text,
         delay: s,
-        useDomAPI = true,
+        useDomAPI = false,
     }: {
         e: HTMLElement;
         text: string;
