@@ -1,5 +1,6 @@
 // The code organization is based on the Model-View-Controller (MVC) design pattern
 
+import { eventHandlerMap } from "./game/events.js";
 import { Store } from "./Store.js";
 
 // Imports
@@ -174,6 +175,7 @@ export const view: ViewControllers = {
 type DoorState = "OPEN" | "CLOSED";
 export type GameStoreData = {
     username: null | string;
+    timeStart: number;
     event: string;
     animatingRoomDoorState: DoorState;
     animatorQuartersLock1: DoorState;
@@ -212,8 +214,9 @@ export class GameStore extends Store<GameStoreData> {
     }
 }
 
-const gameStoreInitData: GameStoreData = {
+export const gameStoreInitData: GameStoreData = {
     username: null,
+    timeStart: 0,
     event: "start-1",
     animatingRoomDoorState: "CLOSED",
     animatorQuartersLock1: "CLOSED",
@@ -226,19 +229,93 @@ const gameStoreInitData: GameStoreData = {
 };
 
 const gameStore = new GameStore({
-    targetObj: gameStoreInitData,
+    targetObj: JSON.parse(JSON.stringify(gameStoreInitData)), // Creating a copy so that the original object is not mutated
     key: "save",
 });
+
+/*----------------*/
+/*EVENT DISPATCHER*/
+/*----------------*/
+
+export type DispatchedEventData = {
+    name: string;
+    countVisit?: boolean;
+    changeCurrentEvent?: boolean;
+};
+
+// The event dispatcher is a class that runs event callbacks
+// This allows us to get around the call stack limit
+// The disadvantage of this approach is that it is more computationally expensive since the code is called every animation frame
+class EventDispatcher {
+    // Properties
+    private __eventQueue: DispatchedEventData[];
+    private __gameObject: GameObject;
+
+    // Methods
+    private async __mainLoop() {
+        // This code will run every animation frame once the event dispatcher is activated
+        // The code checks if there is an event in the event queue and runs it
+        let currentEvent = this.__eventQueue.shift();
+
+        if (currentEvent !== undefined) {
+            const currentEventCallback = eventHandlerMap.get(currentEvent.name);
+
+            if (
+                (currentEvent.countVisit ?? true) &&
+                currentEventCallback !== undefined
+            ) {
+                this.__gameObject.store.data.visits[currentEvent.name] += 1;
+            }
+            if (
+                (currentEvent.changeCurrentEvent ?? true) &&
+                currentEventCallback !== undefined
+            ) {
+                this.__gameObject.store.data.event = currentEvent.name;
+            }
+            currentEventCallback !== undefined &&
+                (await currentEventCallback(this.__gameObject));
+        }
+
+        requestAnimationFrame(this.__mainLoop.bind(this));
+    }
+
+    public activate() {
+        // This function starts the main loop
+        // The reason why we don't want the event dispatcher to automatically start is because we don't need to activate it for pages like the main menu
+
+        requestAnimationFrame(this.__mainLoop.bind(this));
+    }
+
+    public dispatch(eventData: DispatchedEventData) {
+        // This function dispatches an event
+        this.__eventQueue.push(eventData);
+    }
+
+    // Constructor
+    constructor(gameObject: GameObject) {
+        this.__eventQueue = [];
+        this.__gameObject = gameObject;
+    }
+}
 
 /*-----------*/
 /*GAME OBJECT*/
 /*-----------*/
-type GameObject = {
+export type GameObject = {
     store: GameStore;
     view: ViewControllers;
+    dispatcher: EventDispatcher;
 };
 
-export const game: GameObject = {
+const gameWithoutDispatch: Pick<GameObject, "store" | "view"> = {
     store: gameStore,
     view,
 };
+
+// Linking the Event Dispatcher to the game object
+// Note that, in this case, we create a circular reference
+// This is no problem because we never serialize the full game object, just the game store data
+const game: GameObject = gameWithoutDispatch as GameObject;
+game.dispatcher = new EventDispatcher(game as GameObject);
+
+export { game };
