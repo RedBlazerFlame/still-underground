@@ -16,35 +16,26 @@ const main: EventHandler = async function (game: GameObject) {
 
     await textDisplayer.displayAsynchronously({
         e: p1,
-        text: `You are a cop who has been tasked to investigate the recent missing people
-cases in your town. Rumors say that, in the mountains, there is a basement
-where a local artist named `,
-        delay: 0.05,
-    });
-
-    let b1 = el("b");
-
-    p1.appendChild(b1);
-
-    await textDisplayer.displayAsynchronously({
-        e: b1,
-        text: `Eve`,
-        delay: 0.05,
-    });
-
-    await textDisplayer.displayAsynchronously({
-        e: p1,
-        text: ` keeps his animators trapped and forces them to make music videos for him.`,
+        text: `The investigation was going well until you suddenly fall into a hole! You get up and see multiple computers with animating software open. You look at the wall and see a poster...`,
         delay: 0.05,
     });
 
     await delayer.delay(0.5);
 
-    // Show Next Button
+    // Show Buttons
     game.view.navigator.showNext();
+
+    game.view.navigator.showPrev();
 
     await new Promise((r) => {
         game.view.navigator.nextAddEventListener("click", (ev) => {
+            game.dispatcher.dispatch({
+                event: "start-4",
+            });
+            r(undefined);
+        });
+
+        game.view.navigator.previousAddEventListener("click", (ev) => {
             game.dispatcher.dispatch({
                 event: "start-2",
             });

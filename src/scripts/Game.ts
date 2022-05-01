@@ -253,6 +253,7 @@ export type DispatchedEventData = {
     changeTitle?: boolean;
     resetView?: boolean;
     makeDelaysInstant?: boolean;
+    clearEventListeners?: boolean;
 };
 
 // The event dispatcher is a class that runs event callbacks
@@ -314,6 +315,17 @@ class EventDispatcher {
                     textDisplayer.instant(true);
                     delayer.instant(true);
                 }
+            }
+
+            if (
+                (currentEvent.clearEventListeners ?? true) &&
+                currentEventCallback !== undefined
+            ) {
+                this.__gameObject.view.content.removeEventListeners();
+                this.__gameObject.view.controls.removeEventListeners();
+                this.__gameObject.view.navigator.removeEventListeners();
+                this.__gameObject.view.navigator.nextRemoveEventListeners();
+                this.__gameObject.view.navigator.previousRemoveEventListeners();
             }
             currentEventCallback !== undefined &&
                 (await currentEventCallback(this.__gameObject));

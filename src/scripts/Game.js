@@ -1,13 +1,39 @@
 // The code organization is based on the Model-View-Controller (MVC) design pattern
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+var __awaiter =
+    (this && this.__awaiter) ||
+    function (thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P
+                ? value
+                : new P(function (resolve) {
+                      resolve(value);
+                  });
+        }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done
+                    ? resolve(result.value)
+                    : adopt(result.value).then(fulfilled, rejected);
+            }
+            step(
+                (generator = generator.apply(thisArg, _arguments || [])).next()
+            );
+        });
+    };
 import { delayer, textDisplayer } from "./asyncHelpers.js";
 import { eventHandlerMap } from "./game/events.js";
 import { Store } from "./Store.js";
@@ -38,7 +64,7 @@ export class ElementController {
 /// A more specific Element Controller for the navigation system
 export class NavigatorController extends ElementController {
     // Constructor
-    constructor({ container, previousButton, nextButton, }) {
+    constructor({ container, previousButton, nextButton }) {
         super({ element: container });
         this.previousButton = previousButton;
         this.nextButton = nextButton;
@@ -74,7 +100,7 @@ export class NavigatorController extends ElementController {
         this.nextButton.addEventListener(type, fn, opt);
     }
     nextRemoveEventListeners() {
-        while (this.prevEventListeners.length > 0) {
+        while (this.nextEventListeners.length > 0) {
             let curEventListener = this.nextEventListeners.pop();
             this.nextButton.removeEventListener(...curEventListener);
         }
@@ -86,7 +112,7 @@ export class TitleController {
         document.title =
             title === "" ? "Still Underground" : `Still Underground | ${title}`;
     }
-    constructor() { }
+    constructor() {}
 }
 export const view = {
     content: new ElementController({
@@ -161,40 +187,81 @@ class EventDispatcher {
     }
     // Methods
     __mainLoop() {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f;
         return __awaiter(this, void 0, void 0, function* () {
             // This code will run every animation frame once the event dispatcher is activated
             // The code checks if there is an event in the event queue and runs it
             let currentEvent = this.__eventQueue.shift();
             if (currentEvent !== undefined) {
-                const currentEventCallback = eventHandlerMap.get(currentEvent.event);
-                if (((_a = currentEvent.countVisit) !== null && _a !== void 0 ? _a : true) &&
-                    currentEventCallback !== undefined) {
-                    this.__gameObject.store.data.visits[currentEvent.event] += 1;
+                const currentEventCallback = eventHandlerMap.get(
+                    currentEvent.event
+                );
+                if (
+                    ((_a = currentEvent.countVisit) !== null && _a !== void 0
+                        ? _a
+                        : true) &&
+                    currentEventCallback !== undefined
+                ) {
+                    this.__gameObject.store.data.visits[
+                        currentEvent.event
+                    ] += 1;
                 }
-                if (((_b = currentEvent.changeCurrentEvent) !== null && _b !== void 0 ? _b : true) &&
-                    currentEventCallback !== undefined) {
+                if (
+                    ((_b = currentEvent.changeCurrentEvent) !== null &&
+                    _b !== void 0
+                        ? _b
+                        : true) &&
+                    currentEventCallback !== undefined
+                ) {
                     this.__gameObject.store.data.event = currentEvent.event;
                 }
-                if (((_c = currentEvent.changeTitle) !== null && _c !== void 0 ? _c : true) &&
-                    currentEventCallback !== undefined) {
+                if (
+                    ((_c = currentEvent.changeTitle) !== null && _c !== void 0
+                        ? _c
+                        : true) &&
+                    currentEventCallback !== undefined
+                ) {
                     this.__gameObject.view.title.set(currentEvent.event);
                 }
-                if (((_d = currentEvent.resetView) !== null && _d !== void 0 ? _d : true) &&
-                    currentEventCallback !== undefined) {
+                if (
+                    ((_d = currentEvent.resetView) !== null && _d !== void 0
+                        ? _d
+                        : true) &&
+                    currentEventCallback !== undefined
+                ) {
                     this.__gameObject.view.reset();
                 }
-                if (((_e = currentEvent.makeDelaysInstant) !== null && _e !== void 0 ? _e : true) &&
-                    currentEventCallback !== undefined) {
-                    if (this.__gameObject.store.data.visits[currentEvent.event] ===
-                        1) {
+                if (
+                    ((_e = currentEvent.makeDelaysInstant) !== null &&
+                    _e !== void 0
+                        ? _e
+                        : true) &&
+                    currentEventCallback !== undefined
+                ) {
+                    if (
+                        this.__gameObject.store.data.visits[
+                            currentEvent.event
+                        ] === 1
+                    ) {
                         textDisplayer.instant(false);
                         delayer.instant(false);
-                    }
-                    else {
+                    } else {
                         textDisplayer.instant(true);
                         delayer.instant(true);
                     }
+                }
+                if (
+                    ((_f = currentEvent.clearEventListeners) !== null &&
+                    _f !== void 0
+                        ? _f
+                        : true) &&
+                    currentEventCallback !== undefined
+                ) {
+                    this.__gameObject.view.content.removeEventListeners();
+                    this.__gameObject.view.controls.removeEventListeners();
+                    this.__gameObject.view.navigator.removeEventListeners();
+                    this.__gameObject.view.navigator.nextRemoveEventListeners();
+                    this.__gameObject.view.navigator.previousRemoveEventListeners();
                 }
                 currentEventCallback !== undefined &&
                     (yield currentEventCallback(this.__gameObject));
