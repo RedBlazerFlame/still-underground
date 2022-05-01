@@ -1,5 +1,6 @@
 // The code organization is based on the Model-View-Controller (MVC) design pattern
 
+import { delayer, textDisplayer } from "./asyncHelpers.js";
 import { eventHandlerMap } from "./game/events.js";
 import { Store } from "./Store.js";
 
@@ -148,6 +149,7 @@ export type ViewControllers = {
     controls: ElementController<HTMLFormElement>;
     navigator: NavigatorController;
     title: TitleController;
+    reset: () => void;
 };
 
 export const view: ViewControllers = {
@@ -165,6 +167,13 @@ export const view: ViewControllers = {
         nextButton: document.getElementById("nextButton") as HTMLInputElement,
     }),
     title: new TitleController(),
+    reset() {
+        this.content.element.innerHTML = "";
+        this.controls.element.innerHTML = "";
+        this.navigator.show();
+        this.navigator.showNext();
+        this.navigator.showPrev();
+    },
 };
 
 /*-----*/
@@ -238,9 +247,12 @@ const gameStore = new GameStore({
 /*----------------*/
 
 export type DispatchedEventData = {
-    name: string;
+    event: string;
     countVisit?: boolean;
     changeCurrentEvent?: boolean;
+    changeTitle?: boolean;
+    resetView?: boolean;
+    makeDelaysInstant?: boolean;
 };
 
 // The event dispatcher is a class that runs event callbacks
@@ -258,19 +270,50 @@ class EventDispatcher {
         let currentEvent = this.__eventQueue.shift();
 
         if (currentEvent !== undefined) {
-            const currentEventCallback = eventHandlerMap.get(currentEvent.name);
+            const currentEventCallback = eventHandlerMap.get(
+                currentEvent.event
+            );
 
             if (
                 (currentEvent.countVisit ?? true) &&
                 currentEventCallback !== undefined
             ) {
-                this.__gameObject.store.data.visits[currentEvent.name] += 1;
+                this.__gameObject.store.data.visits[currentEvent.event] += 1;
             }
             if (
                 (currentEvent.changeCurrentEvent ?? true) &&
                 currentEventCallback !== undefined
             ) {
-                this.__gameObject.store.data.event = currentEvent.name;
+                this.__gameObject.store.data.event = currentEvent.event;
+            }
+            if (
+                (currentEvent.changeTitle ?? true) &&
+                currentEventCallback !== undefined
+            ) {
+                this.__gameObject.view.title.set(currentEvent.event);
+            }
+
+            if (
+                (currentEvent.resetView ?? true) &&
+                currentEventCallback !== undefined
+            ) {
+                this.__gameObject.view.reset();
+            }
+
+            if (
+                (currentEvent.makeDelaysInstant ?? true) &&
+                currentEventCallback !== undefined
+            ) {
+                if (
+                    this.__gameObject.store.data.visits[currentEvent.event] ===
+                    1
+                ) {
+                    textDisplayer.instant(false);
+                    delayer.instant(false);
+                } else {
+                    textDisplayer.instant(true);
+                    delayer.instant(true);
+                }
             }
             currentEventCallback !== undefined &&
                 (await currentEventCallback(this.__gameObject));

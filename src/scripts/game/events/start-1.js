@@ -7,15 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { delay } from "../../asyncHelpers.js";
-import { appendChildren, parseHTML } from "../../domHelpers.js";
 const main = function (game) {
-    return __awaiter(this, void 0, void 0, function* () {
-        // Just a test. Output something to the screen, wait one second, and invoke the same event again
-        appendChildren(game.view.content.element, parseHTML("<p>Hi Mom!</p><br>"));
-        yield delay(1);
-        appendChildren(game.view.content.element, parseHTML("<p>This occurred one second afterwards!</p><br>"));
-        yield delay(1);
-    });
+    return __awaiter(this, void 0, void 0, function* () { });
 };
 export default main;

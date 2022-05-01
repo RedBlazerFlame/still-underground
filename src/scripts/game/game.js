@@ -4,6 +4,6 @@ import { game } from "../Game.js";
 game.dispatcher.activate();
 // Dispatch the Current Event that is in the game store
 game.dispatcher.dispatch({
-    name: game.store.data.event,
+    event: game.store.data.event,
     countVisit: false,
 });

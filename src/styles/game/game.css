@@ -28,6 +28,10 @@
     overflow-y: auto;
 }
 
+.content * {
+    max-width: 70vw;
+}
+
 .controls {
     grid-area: controls;
     overflow-y: auto;

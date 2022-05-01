@@ -142,6 +142,10 @@ a {
     font-size: 0.75rem;
 }
 
+.margin-12px {
+    margin: 12px;
+}
+
 .nodisplay {
     display: none;
 }

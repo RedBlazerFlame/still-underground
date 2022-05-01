@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { delayer, textDisplayer } from "./asyncHelpers.js";
 import { eventHandlerMap } from "./game/events.js";
 import { Store } from "./Store.js";
 export class ElementController {
@@ -100,6 +101,13 @@ export const view = {
         nextButton: document.getElementById("nextButton"),
     }),
     title: new TitleController(),
+    reset() {
+        this.content.element.innerHTML = "";
+        this.controls.element.innerHTML = "";
+        this.navigator.show();
+        this.navigator.showNext();
+        this.navigator.showPrev();
+    },
 };
 export class GameStore extends Store {
     /// This method ensures that all sub-objects are also wrapped in a proxy
@@ -153,20 +161,40 @@ class EventDispatcher {
     }
     // Methods
     __mainLoop() {
-        var _a, _b;
+        var _a, _b, _c, _d, _e;
         return __awaiter(this, void 0, void 0, function* () {
             // This code will run every animation frame once the event dispatcher is activated
             // The code checks if there is an event in the event queue and runs it
             let currentEvent = this.__eventQueue.shift();
             if (currentEvent !== undefined) {
-                const currentEventCallback = eventHandlerMap.get(currentEvent.name);
+                const currentEventCallback = eventHandlerMap.get(currentEvent.event);
                 if (((_a = currentEvent.countVisit) !== null && _a !== void 0 ? _a : true) &&
                     currentEventCallback !== undefined) {
-                    this.__gameObject.store.data.visits[currentEvent.name] += 1;
+                    this.__gameObject.store.data.visits[currentEvent.event] += 1;
                 }
                 if (((_b = currentEvent.changeCurrentEvent) !== null && _b !== void 0 ? _b : true) &&
                     currentEventCallback !== undefined) {
-                    this.__gameObject.store.data.event = currentEvent.name;
+                    this.__gameObject.store.data.event = currentEvent.event;
+                }
+                if (((_c = currentEvent.changeTitle) !== null && _c !== void 0 ? _c : true) &&
+                    currentEventCallback !== undefined) {
+                    this.__gameObject.view.title.set(currentEvent.event);
+                }
+                if (((_d = currentEvent.resetView) !== null && _d !== void 0 ? _d : true) &&
+                    currentEventCallback !== undefined) {
+                    this.__gameObject.view.reset();
+                }
+                if (((_e = currentEvent.makeDelaysInstant) !== null && _e !== void 0 ? _e : true) &&
+                    currentEventCallback !== undefined) {
+                    if (this.__gameObject.store.data.visits[currentEvent.event] ===
+                        1) {
+                        textDisplayer.instant(false);
+                        delayer.instant(false);
+                    }
+                    else {
+                        textDisplayer.instant(true);
+                        delayer.instant(true);
+                    }
                 }
                 currentEventCallback !== undefined &&
                     (yield currentEventCallback(this.__gameObject));
