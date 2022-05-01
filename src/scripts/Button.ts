@@ -2,8 +2,9 @@
 
 {
     let buttons: NodeListOf<HTMLElement> = document.querySelectorAll(
-        "button, input[type=button]"
+        "button, input[type=button], input[type=submit]"
     );
+
     buttons.forEach((button) => {
         button.addEventListener("click", (ev) => {
             button.blur();

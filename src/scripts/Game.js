@@ -71,10 +71,11 @@ export class NavigatorController extends ElementController {
 }
 /// A controller to modify the title of the site
 export class TitleController {
-    static set(title) {
+    set(title) {
         document.title =
             title === "" ? "Still Underground" : `Still Underground | ${title}`;
     }
+    constructor() { }
 }
 export const view = {
     content: new ElementController({
@@ -88,7 +89,7 @@ export const view = {
         previousButton: document.getElementById("previousButton"),
         nextButton: document.getElementById("nextButton"),
     }),
-    title: TitleController,
+    title: new TitleController(),
 };
 export class GameStore extends Store {
     /// This method ensures that all sub-objects are also wrapped in a proxy

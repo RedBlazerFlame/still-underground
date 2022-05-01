@@ -10,7 +10,7 @@ import { Store } from "./Store.js";
 
 /// A general Element Controller to modify any kind of HTML element
 type EventListenerArgs = [
-    keyof ElementEventMap,
+    keyof HTMLElementEventMap,
     (ev: Event) => any,
     boolean | AddEventListenerOptions | undefined
 ];
@@ -29,9 +29,9 @@ export class ElementController<T extends HTMLElement = HTMLElement> {
     }
 
     public addEventListener(
-        type: keyof ElementEventMap,
+        type: keyof HTMLElementEventMap,
         fn: (ev: Event) => any,
-        opt: boolean | AddEventListenerOptions | undefined
+        opt?: boolean | AddEventListenerOptions
     ) {
         this.eventListeners.push([type, fn, opt]);
         this.element.addEventListener(type, fn, opt);
@@ -79,9 +79,9 @@ export class NavigatorController extends ElementController<HTMLFormElement> {
 
     /// Handling Event Listeners
     public previousAddEventListener(
-        type: keyof ElementEventMap,
+        type: keyof HTMLElementEventMap,
         fn: (ev: Event) => any,
-        opt: boolean | AddEventListenerOptions | undefined
+        opt?: boolean | AddEventListenerOptions
     ) {
         this.prevEventListeners.push([type, fn, opt]);
         this.previousButton.addEventListener(type, fn, opt);
@@ -96,9 +96,9 @@ export class NavigatorController extends ElementController<HTMLFormElement> {
     }
 
     public nextAddEventListener(
-        type: keyof ElementEventMap,
+        type: keyof HTMLElementEventMap,
         fn: (ev: Event) => any,
-        opt: boolean | AddEventListenerOptions | undefined
+        opt?: boolean | AddEventListenerOptions
     ) {
         this.nextEventListeners.push([type, fn, opt]);
         this.nextButton.addEventListener(type, fn, opt);
@@ -133,10 +133,12 @@ export class NavigatorController extends ElementController<HTMLFormElement> {
 
 /// A controller to modify the title of the site
 export class TitleController {
-    static set(title: string) {
+    set(title: string) {
         document.title =
             title === "" ? "Still Underground" : `Still Underground | ${title}`;
     }
+
+    constructor() {}
 }
 
 // The view object combines all of the Element Controllers for easy access
@@ -161,7 +163,7 @@ export const view: ViewControllers = {
         ) as HTMLInputElement,
         nextButton: document.getElementById("nextButton") as HTMLInputElement,
     }),
-    title: TitleController,
+    title: new TitleController(),
 };
 
 /*-----*/

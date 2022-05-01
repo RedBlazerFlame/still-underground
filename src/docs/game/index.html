@@ -16,11 +16,11 @@
 
         <!-- Scripts -->
         <script type="module" src="/scripts/global.js" defer></script>
-        <script type="module" src="/scripts/game.js" defer></script>
+        <script type="module" src="/scripts/game/game.js" defer></script>
 
         <!-- Styles -->
         <link rel="stylesheet" href="/styles/global.css" />
-        <link rel="stylesheet" href="/styles/game.css" />
+        <link rel="stylesheet" href="/styles/game/game.css" />
 
         <!-- Icon -->
         <link rel="icon" href="/images/icon.png" />
@@ -28,6 +28,41 @@
         <title>Still Underground | start-1</title>
     </head>
     <body>
-        <main class="window">TODO</main>
+        <main class="window">
+            <section class="content stretched-horizontally">
+                <!-- This is where the plot of the story will be shown -->
+                <div id="content"></div>
+            </section>
+            <section class="controls centered">
+                <!-- This form is where the user will input answers to questions -->
+                <!-- Note that the form content will dynamically change -->
+                <form id="controls" class="nosubmit"></form>
+            </section>
+            <section class="navigator stretched">
+                <!-- This will allow the user to travel back and forth between events -->
+                <form
+                    action=""
+                    id="navigator"
+                    class="spaced-between-horizontally nosubmit"
+                >
+                    <input
+                        type="button"
+                        name="previousButton"
+                        value="&#8592; Previous"
+                        class="button hoverable"
+                        id="previousButton"
+                        form="navigator"
+                    />
+                    <input
+                        type="button"
+                        name="nextButton"
+                        value="Next &#8594;"
+                        class="button hoverable"
+                        id="nextButton"
+                        form="navigator"
+                    />
+                </form>
+            </section>
+        </main>
     </body>
 </html>
