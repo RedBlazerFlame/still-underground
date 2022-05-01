@@ -54,6 +54,8 @@ export class Store<T extends Object> {
         let localStorageData = localStorage.getItem(key);
         if (localStorageData !== null) {
             targetObj = JSON.parse(localStorageData);
+        } else {
+            localStorage.setItem(key, JSON.stringify(targetObj));
         }
         this.data = new Proxy(targetObj, {
             set: (o, p, v, r) => {

@@ -9,9 +9,15 @@ import { Store } from "./Store.js";
 /*-----------*/
 
 /// A general Element Controller to modify any kind of HTML element
+type EventListenerArgs = [
+    keyof ElementEventMap,
+    (ev: Event) => any,
+    boolean | AddEventListenerOptions | undefined
+];
 export class ElementController<T extends HTMLElement = HTMLElement> {
     // Properties
     element: T; // This is the reference to the HTML Element (view)
+    eventListeners: EventListenerArgs[];
 
     // Methods
     public hide(): void {
@@ -22,9 +28,27 @@ export class ElementController<T extends HTMLElement = HTMLElement> {
         this.element.classList.remove("nodisplay");
     }
 
+    public addEventListener(
+        type: keyof ElementEventMap,
+        fn: (ev: Event) => any,
+        opt: boolean | AddEventListenerOptions | undefined
+    ) {
+        this.eventListeners.push([type, fn, opt]);
+        this.element.addEventListener(type, fn, opt);
+    }
+
+    public removeEventListeners() {
+        while (this.eventListeners.length > 0) {
+            let curEventListener =
+                this.eventListeners.pop() as EventListenerArgs;
+            this.element.removeEventListener(...curEventListener);
+        }
+    }
+
     // Constructor
     constructor({ element }: { element: T }) {
         this.element = element;
+        this.eventListeners = [];
     }
 }
 
@@ -33,6 +57,8 @@ export class NavigatorController extends ElementController<HTMLFormElement> {
     // Properties
     previousButton: HTMLInputElement; // This is the reference to the HTML Element (view)
     nextButton: HTMLInputElement; // This is the reference to the HTML Element (view)
+    prevEventListeners: EventListenerArgs[];
+    nextEventListeners: EventListenerArgs[];
 
     // Methods
     public hidePrev(): void {
@@ -51,6 +77,41 @@ export class NavigatorController extends ElementController<HTMLFormElement> {
         this.nextButton.classList.remove("nodisplay");
     }
 
+    /// Handling Event Listeners
+    public previousAddEventListener(
+        type: keyof ElementEventMap,
+        fn: (ev: Event) => any,
+        opt: boolean | AddEventListenerOptions | undefined
+    ) {
+        this.prevEventListeners.push([type, fn, opt]);
+        this.previousButton.addEventListener(type, fn, opt);
+    }
+
+    public previousRemoveEventListeners() {
+        while (this.prevEventListeners.length > 0) {
+            let curEventListener =
+                this.prevEventListeners.pop() as EventListenerArgs;
+            this.previousButton.removeEventListener(...curEventListener);
+        }
+    }
+
+    public nextAddEventListener(
+        type: keyof ElementEventMap,
+        fn: (ev: Event) => any,
+        opt: boolean | AddEventListenerOptions | undefined
+    ) {
+        this.nextEventListeners.push([type, fn, opt]);
+        this.nextButton.addEventListener(type, fn, opt);
+    }
+
+    public nextRemoveEventListeners() {
+        while (this.prevEventListeners.length > 0) {
+            let curEventListener =
+                this.nextEventListeners.pop() as EventListenerArgs;
+            this.nextButton.removeEventListener(...curEventListener);
+        }
+    }
+
     // Constructor
     constructor({
         container,
@@ -65,6 +126,16 @@ export class NavigatorController extends ElementController<HTMLFormElement> {
 
         this.previousButton = previousButton;
         this.nextButton = nextButton;
+        this.prevEventListeners = [];
+        this.nextEventListeners = [];
+    }
+}
+
+/// A controller to modify the title of the site
+export class TitleController {
+    static set(title: string) {
+        document.title =
+            title === "" ? "Still Underground" : `Still Underground | ${title}`;
     }
 }
 
@@ -73,6 +144,7 @@ export type ViewControllers = {
     content: ElementController;
     controls: ElementController<HTMLFormElement>;
     navigator: NavigatorController;
+    title: TitleController;
 };
 
 export const view: ViewControllers = {
@@ -89,6 +161,7 @@ export const view: ViewControllers = {
         ) as HTMLInputElement,
         nextButton: document.getElementById("nextButton") as HTMLInputElement,
     }),
+    title: TitleController,
 };
 
 /*-----*/

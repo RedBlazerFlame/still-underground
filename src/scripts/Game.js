@@ -1,14 +1,10 @@
 // The code organization is based on the Model-View-Controller (MVC) design pattern
 import { Store } from "./Store.js";
-// Imports
-/*-----------*/
-/*CONTROLLERS*/
-/*-----------*/
-/// A general Element Controller to modify any kind of HTML element
 export class ElementController {
     // Constructor
     constructor({ element }) {
         this.element = element;
+        this.eventListeners = [];
     }
     // Methods
     hide() {
@@ -16,6 +12,16 @@ export class ElementController {
     }
     show() {
         this.element.classList.remove("nodisplay");
+    }
+    addEventListener(type, fn, opt) {
+        this.eventListeners.push([type, fn, opt]);
+        this.element.addEventListener(type, fn, opt);
+    }
+    removeEventListeners() {
+        while (this.eventListeners.length > 0) {
+            let curEventListener = this.eventListeners.pop();
+            this.element.removeEventListener(...curEventListener);
+        }
     }
 }
 /// A more specific Element Controller for the navigation system
@@ -25,6 +31,8 @@ export class NavigatorController extends ElementController {
         super({ element: container });
         this.previousButton = previousButton;
         this.nextButton = nextButton;
+        this.prevEventListeners = [];
+        this.nextEventListeners = [];
     }
     // Methods
     hidePrev() {
@@ -39,6 +47,34 @@ export class NavigatorController extends ElementController {
     showNext() {
         this.nextButton.classList.remove("nodisplay");
     }
+    /// Handling Event Listeners
+    previousAddEventListener(type, fn, opt) {
+        this.prevEventListeners.push([type, fn, opt]);
+        this.previousButton.addEventListener(type, fn, opt);
+    }
+    previousRemoveEventListeners() {
+        while (this.prevEventListeners.length > 0) {
+            let curEventListener = this.prevEventListeners.pop();
+            this.previousButton.removeEventListener(...curEventListener);
+        }
+    }
+    nextAddEventListener(type, fn, opt) {
+        this.nextEventListeners.push([type, fn, opt]);
+        this.nextButton.addEventListener(type, fn, opt);
+    }
+    nextRemoveEventListeners() {
+        while (this.prevEventListeners.length > 0) {
+            let curEventListener = this.nextEventListeners.pop();
+            this.nextButton.removeEventListener(...curEventListener);
+        }
+    }
+}
+/// A controller to modify the title of the site
+export class TitleController {
+    static set(title) {
+        document.title =
+            title === "" ? "Still Underground" : `Still Underground | ${title}`;
+    }
 }
 export const view = {
     content: new ElementController({
@@ -52,6 +88,7 @@ export const view = {
         previousButton: document.getElementById("previousButton"),
         nextButton: document.getElementById("nextButton"),
     }),
+    title: TitleController,
 };
 export class GameStore extends Store {
     /// This method ensures that all sub-objects are also wrapped in a proxy

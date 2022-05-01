@@ -7,6 +7,9 @@ export class Store {
         if (localStorageData !== null) {
             targetObj = JSON.parse(localStorageData);
         }
+        else {
+            localStorage.setItem(key, JSON.stringify(targetObj));
+        }
         this.data = new Proxy(targetObj, {
             set: (o, p, v, r) => {
                 let res = Reflect.set(o, p, v, r);
