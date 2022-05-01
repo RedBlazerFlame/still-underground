@@ -7,8 +7,9 @@ export type BestTimeStore = {
     bestGoodId?: string;
 };
 
-const bestTimeStore = new Store<BestTimeStore>({}, "bestTime");
-
-bestTimeStore.load();
+const bestTimeStore = new Store<BestTimeStore>({
+    targetObj: {},
+    key: "bestTime",
+});
 
 export default bestTimeStore;

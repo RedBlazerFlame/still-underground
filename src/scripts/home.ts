@@ -1,5 +1,7 @@
+import { game } from "./Game.js";
+
 // Declaring Constants and Variables
-const hasSave = localStorage.getItem("save") !== null;
+const hasSave = game.store.data.username !== null;
 
 // Getting a Reference to HTML Elements
 const newGameButton: HTMLButtonElement = document.getElementById(

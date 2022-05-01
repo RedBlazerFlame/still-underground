@@ -1,6 +1,5 @@
 // Imports
-// TODO import game from "./Game.js";
-// TODO create the main store for the game data
+import { game } from "./Game.js";
 
 import { delay } from "./asyncHelpers.js";
 
@@ -44,8 +43,9 @@ import { delay } from "./asyncHelpers.js";
             nameInputIndicator.classList.add("hidden");
             nameInputIndicator.classList.remove("error");
         } else {
-            // The inputted name is valid. Do some preprocessing before starting the game
+            // The inputted name is valid. Set this as the name of the user and start the game
+            game.store.data.username = name;
+            window.location.replace("/game");
         }
-        // window.location.replace("/game");
     });
 }

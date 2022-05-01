@@ -32,6 +32,10 @@ export class Store<T extends Object> {
             },
         });
 
+        // We also need to ensure that all objects contained within the main object is wrapped in a proxy
+        // If we don't do this, doing things like obj.a.b = "Another Value" won't reflect as a set operation
+        this.proxify();
+
         // Save the new data into localStorage
         this.save();
     }
@@ -40,9 +44,17 @@ export class Store<T extends Object> {
         localStorage.setItem(this.key, JSON.stringify(this.data));
     }
 
+    public proxify() {
+        // This function will be implemented in subclasses
+    }
+
     // Constructor
-    constructor(targetObj: T, key: string) {
+    constructor({ targetObj, key }: { targetObj: T; key: string }) {
         this.key = key;
+        let localStorageData = localStorage.getItem(key);
+        if (localStorageData !== null) {
+            targetObj = JSON.parse(localStorageData);
+        }
         this.data = new Proxy(targetObj, {
             set: (o, p, v, r) => {
                 let res = Reflect.set(o, p, v, r);
@@ -50,5 +62,6 @@ export class Store<T extends Object> {
                 return res;
             },
         });
+        this.proxify();
     }
 }

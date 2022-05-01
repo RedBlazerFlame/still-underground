@@ -1,6 +1,3 @@
-// Imports
-// TODO import game from "./Game.js";
-// TODO create the main store for the game data
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -10,6 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// Imports
+import { game } from "./Game.js";
 import { delay } from "./asyncHelpers.js";
 {
     // Getting a Reference to HTML elements
@@ -46,8 +45,9 @@ import { delay } from "./asyncHelpers.js";
             nameInputIndicator.classList.remove("error");
         }
         else {
-            // The inputted name is valid. Do some preprocessing before starting the game
+            // The inputted name is valid. Set this as the name of the user and start the game
+            game.store.data.username = name;
+            window.location.replace("/game");
         }
-        // window.location.replace("/game");
     }));
 }

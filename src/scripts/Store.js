@@ -1,8 +1,12 @@
 // The Store object automatically saves the data to localStorage whenever the state changes
 export class Store {
     // Constructor
-    constructor(targetObj, key) {
+    constructor({ targetObj, key }) {
         this.key = key;
+        let localStorageData = localStorage.getItem(key);
+        if (localStorageData !== null) {
+            targetObj = JSON.parse(localStorageData);
+        }
         this.data = new Proxy(targetObj, {
             set: (o, p, v, r) => {
                 let res = Reflect.set(o, p, v, r);
@@ -10,6 +14,7 @@ export class Store {
                 return res;
             },
         });
+        this.proxify();
     }
     // Methods
     load() {
@@ -33,10 +38,16 @@ export class Store {
                 return res;
             },
         });
+        // We also need to ensure that all objects contained within the main object is wrapped in a proxy
+        // If we don't do this, doing things like obj.a.b = "Another Value" won't reflect as a set operation
+        this.proxify();
         // Save the new data into localStorage
         this.save();
     }
     save() {
         localStorage.setItem(this.key, JSON.stringify(this.data));
+    }
+    proxify() {
+        // This function will be implemented in subclasses
     }
 }

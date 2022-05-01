@@ -1,6 +1,13 @@
 // The code organization is based on the Model-View-Controller (MVC) design pattern
 
-// Controllers
+import { Store } from "./Store.js";
+
+// Imports
+
+/*-----------*/
+/*CONTROLLERS*/
+/*-----------*/
+
 /// A general Element Controller to modify any kind of HTML element
 export class ElementController<T extends HTMLElement = HTMLElement> {
     // Properties
@@ -68,7 +75,7 @@ export type ViewControllers = {
     navigator: NavigatorController;
 };
 
-const view: ViewControllers = {
+export const view: ViewControllers = {
     content: new ElementController({
         element: document.getElementById("content") as HTMLElement,
     }),
@@ -84,6 +91,79 @@ const view: ViewControllers = {
     }),
 };
 
-// TODO Create the Store for the Game Data
+/*-----*/
+/*MODEL*/
+/*-----*/
 
-// TODO Create the Game Object
+// Create the Store for the Game Data
+type DoorState = "OPEN" | "CLOSED";
+export type GameStoreData = {
+    username: null | string;
+    event: string;
+    animatingRoomDoorState: DoorState;
+    animatorQuartersLock1: DoorState;
+    animatorQuartersLock2: DoorState;
+    animatorQuartersLock3: DoorState;
+    ending: null | "BAD" | "NEUTRAL" | "GOOD";
+    visits: {
+        [key: string]: number;
+    } /* This is for tracking the number of times the player has gone through an event */;
+    [key: string]: null | number | string | Object;
+};
+
+export class GameStore extends Store<GameStoreData> {
+    /// This method ensures that all sub-objects are also wrapped in a proxy
+    public proxify() {
+        this.data.visits = new Proxy(this.data.visits, {
+            set: (o, p, v, r) => {
+                let res = Reflect.set(o, p, v, r);
+                localStorage.setItem(this.key, JSON.stringify(this.data));
+                return res;
+            },
+            get: (o, p, r) => {
+                let res = Reflect.get(o, p, r);
+                res === undefined && Reflect.set(o, p, 0); // If the property does not exist yet, but is accessed, create the property and set the value to zero
+                return res ?? 0;
+            },
+        });
+    }
+
+    // Constructor
+    constructor({ targetObj, key }: { targetObj: GameStoreData; key: string }) {
+        super({
+            targetObj,
+            key,
+        });
+    }
+}
+
+const gameStoreInitData: GameStoreData = {
+    username: null,
+    event: "start-1",
+    animatingRoomDoorState: "CLOSED",
+    animatorQuartersLock1: "CLOSED",
+    animatorQuartersLock2: "CLOSED",
+    animatorQuartersLock3: "CLOSED",
+    ending: null,
+    visits: {
+        "start-1": 1,
+    },
+};
+
+const gameStore = new GameStore({
+    targetObj: gameStoreInitData,
+    key: "save",
+});
+
+/*-----------*/
+/*GAME OBJECT*/
+/*-----------*/
+type GameObject = {
+    store: GameStore;
+    view: ViewControllers;
+};
+
+export const game: GameObject = {
+    store: gameStore,
+    view,
+};
