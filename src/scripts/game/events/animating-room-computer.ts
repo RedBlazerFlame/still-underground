@@ -6,6 +6,9 @@ import { GameObject } from "../../Game.js";
 import { EventHandler } from "../events.js";
 
 const main: EventHandler = async function (game: GameObject) {
+    // Preprocessing
+    game.view.navigator.hideNext();
+
     // Display the text
     let p1 = el("p");
     game.view.content.element.appendChild(p1);
@@ -17,7 +20,7 @@ const main: EventHandler = async function (game: GameObject) {
             delay: 0.05,
         });
 
-        p1.appendChild(el("br"));
+        appendChildren(p1, [el("br"), el("br")]);
 
         await delayer.delay(1);
 
@@ -35,13 +38,13 @@ const main: EventHandler = async function (game: GameObject) {
             delay: 0.05,
         });
 
-        p1.appendChild(el("br"));
+        appendChildren(p1, [el("br"), el("br")]);
 
         await delayer.delay(1);
 
         await textDisplayer.displayAsynchronously({
             e: p1,
-            text: '"Who did Eve sing with in the album Oyasumi?"',
+            text: "\"In the song titled 'World Domination', Eve sings a solo part around two minutes into the song. What is the name of the Utaite that sings right after Eve?\"",
             delay: 0.05,
         });
 
@@ -70,12 +73,6 @@ const main: EventHandler = async function (game: GameObject) {
 
     await new Promise((r) => {
         // Back Button
-
-        // let backToAnimatingRoom = parseHTML(
-        //     "<input class='margin-12px' type='button' form='controls' value='&#8592; Back'>"
-        // )[0];
-
-        game.view.navigator.hideNext();
 
         game.view.navigator.previousAddEventListener("click", (ev) => {
             game.dispatcher.dispatch({
@@ -146,7 +143,7 @@ const main: EventHandler = async function (game: GameObject) {
                 r(undefined);
             });
 
-            answerChoices.addEventListener("click", (ev) => {
+            answerChoices.addEventListener("change", (ev) => {
                 // If the input changes, set the value of the submit button
                 submitButton.value = `Submit "${answerChoices.value}"`;
             });
@@ -159,12 +156,50 @@ const main: EventHandler = async function (game: GameObject) {
             - Inputs —  Question
                 - Submit
                     - Onsubmit
-                        - IF answer.toLowerCase().trim() === “yurin” →
+                        - IF answer.toLowerCase().trim() === sou →
                             
                             [open-animator-quarters-lock-1](https://www.notion.so/open-animator-quarters-lock-1-9304c9f834de4d2b8098ef50d3314a53)
                             
                         - ELSE [bad-ending]
             */
+
+            let answerInput = parseHTML(
+                `<input class='margin-12px textarea' type='text' placeholder="Input the Name" form='controls' name="answer" id="answer">`
+            )[0] as HTMLSelectElement;
+
+            game.view.controls.element.appendChild(answerInput);
+
+            let submitButton = parseHTML(
+                `<input type='submit' value='Submit ""' form='controls'>`
+            )[0] as HTMLInputElement;
+
+            game.view.controls.element.appendChild(submitButton);
+
+            // Event Listeners
+
+            game.view.controls.addEventListener("submit", (ev) => {
+                let { answer } = getFormData(game.view.controls.element);
+
+                // Check if input is correct
+                if (answer.toLowerCase().trim() === "sou") {
+                    game.dispatcher.dispatch({
+                        event: "open-animator-quarters-lock-1",
+                    });
+                } else {
+                    game.dispatcher.dispatch({
+                        event: "bad-ending",
+                    });
+                }
+
+                r(undefined);
+            });
+
+            answerInput.addEventListener("input", (ev) => {
+                // If the input changes, set the value of the submit button
+                submitButton.value = `Submit "${answerInput.value
+                    .toLowerCase()
+                    .trim()}"`;
+            });
         }
     });
 };

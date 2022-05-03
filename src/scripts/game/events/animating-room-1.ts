@@ -67,17 +67,11 @@ const main: EventHandler = async function (game: GameObject) {
         } else {
             await textDisplayer.displayAsynchronously({
                 e: p1,
-                text: "The door is open, ",
+                text: "The door is open.",
                 delay: 0.05,
             });
 
-            await delayer.delay(0.4);
-
-            await textDisplayer.displayAsynchronously({
-                e: p1,
-                text: " perhaps there is another clue in this room though...",
-                delay: 0.05,
-            });
+            await delayer.delay(1);
         }
 
         if (game.store.data.animatorQuartersLock1 === "CLOSED") {

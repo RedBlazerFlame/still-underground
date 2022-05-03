@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 // Imports
 import { game, gameStoreInitData } from "./Game.js";
 import { delay } from "./asyncHelpers.js";
+import { PROGRAM_MODE } from "./mode.js";
 {
     // Getting a Reference to HTML elements
     const mainMenuButton = document.getElementById("mainMenuButton");
@@ -17,6 +18,10 @@ import { delay } from "./asyncHelpers.js";
     const nameForm = document.getElementById("inputs");
     const nameInputIndicator = document.getElementById("nameInputIndicator");
     const nameInput = document.getElementById("nameInput");
+    // If we are on dev mode, insert a name in the name field to avoid having to type a name over and over again when testing
+    if (PROGRAM_MODE === "DEV") {
+        nameInput.value = "Frisk";
+    }
     // Attaching Event Listeners
     mainMenuButton === null || mainMenuButton === void 0 ? void 0 : mainMenuButton.addEventListener("click", (ev) => {
         window.location.replace("/");

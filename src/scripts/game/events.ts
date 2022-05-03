@@ -13,6 +13,7 @@ import animatingRoomComputer from "./events/animating-room-computer.js";
 import openAnimatingRoomDoor1 from "./events/open-animating-room-door-1.js";
 import badEnding from "./events/bad-ending.js";
 import finish from "./events/finish.js";
+import openAnimatorQuartersLock1 from "./events/open-animator-quarters-lock-1.js";
 
 // Imports
 
@@ -33,4 +34,5 @@ export const eventHandlerMap = new Map([
     ["open-animating-room-door-1", openAnimatingRoomDoor1],
     ["bad-ending", badEnding],
     ["finish", finish],
+    ["open-animator-quarters-lock-1", openAnimatorQuartersLock1],
 ]);

@@ -9,10 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { el } from "../../aliases.js";
 import { delayer, textDisplayer } from "../../asyncHelpers.js";
-import { parseHTML } from "../../domHelpers.js";
+import { appendChildren, parseHTML } from "../../domHelpers.js";
 import { getFormData } from "../../formHelpers.js";
 const main = function (game) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Preprocessing
+        game.view.navigator.hideNext();
         // Display the text
         let p1 = el("p");
         game.view.content.element.appendChild(p1);
@@ -22,7 +24,7 @@ const main = function (game) {
                 text: "The computer is displaying a question.",
                 delay: 0.05,
             });
-            p1.appendChild(el("br"));
+            appendChildren(p1, [el("br"), el("br")]);
             yield delayer.delay(1);
             yield textDisplayer.displayAsynchronously({
                 e: p1,
@@ -37,11 +39,11 @@ const main = function (game) {
                 text: "The computer is displaying a question.",
                 delay: 0.05,
             });
-            p1.appendChild(el("br"));
+            appendChildren(p1, [el("br"), el("br")]);
             yield delayer.delay(1);
             yield textDisplayer.displayAsynchronously({
                 e: p1,
-                text: '"Who did Eve sing with in the album Oyasumi?"',
+                text: "\"In the song titled 'World Domination', Eve sings a solo part around two minutes into the song. What is the name of the Utaite that sings right after Eve?\"",
                 delay: 0.05,
             });
             p1.appendChild(el("br"));
@@ -64,10 +66,6 @@ const main = function (game) {
         // Create controls
         yield new Promise((r) => {
             // Back Button
-            // let backToAnimatingRoom = parseHTML(
-            //     "<input class='margin-12px' type='button' form='controls' value='&#8592; Back'>"
-            // )[0];
-            game.view.navigator.hideNext();
             game.view.navigator.previousAddEventListener("click", (ev) => {
                 game.dispatcher.dispatch({
                     event: "animating-room-1",
@@ -120,7 +118,7 @@ const main = function (game) {
                     }
                     r(undefined);
                 });
-                answerChoices.addEventListener("click", (ev) => {
+                answerChoices.addEventListener("change", (ev) => {
                     // If the input changes, set the value of the submit button
                     submitButton.value = `Submit "${answerChoices.value}"`;
                 });
@@ -134,12 +132,38 @@ const main = function (game) {
                 - Inputs —  Question
                     - Submit
                         - Onsubmit
-                            - IF answer.toLowerCase().trim() === “yurin” →
+                            - IF answer.toLowerCase().trim() === sou →
                                 
                                 [open-animator-quarters-lock-1](https://www.notion.so/open-animator-quarters-lock-1-9304c9f834de4d2b8098ef50d3314a53)
                                 
                             - ELSE [bad-ending]
                 */
+                let answerInput = parseHTML(`<input class='margin-12px textarea' type='text' placeholder="Input the Name" form='controls' name="answer" id="answer">`)[0];
+                game.view.controls.element.appendChild(answerInput);
+                let submitButton = parseHTML(`<input type='submit' value='Submit ""' form='controls'>`)[0];
+                game.view.controls.element.appendChild(submitButton);
+                // Event Listeners
+                game.view.controls.addEventListener("submit", (ev) => {
+                    let { answer } = getFormData(game.view.controls.element);
+                    // Check if input is correct
+                    if (answer.toLowerCase().trim() === "sou") {
+                        game.dispatcher.dispatch({
+                            event: "open-animator-quarters-lock-1",
+                        });
+                    }
+                    else {
+                        game.dispatcher.dispatch({
+                            event: "bad-ending",
+                        });
+                    }
+                    r(undefined);
+                });
+                answerInput.addEventListener("input", (ev) => {
+                    // If the input changes, set the value of the submit button
+                    submitButton.value = `Submit "${answerInput.value
+                        .toLowerCase()
+                        .trim()}"`;
+                });
             }
         });
     });

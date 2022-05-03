@@ -1,17 +1,34 @@
-.button, button, input[type=button], input[type=submit] {
+.button,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
     background-color: black;
     border: 4px solid white;
     color: white;
-    font-family: 'VT323', monospace;
+    font-family: "VT323", monospace;
     font-size: 1.5rem;
 }
 
-.button.hoverable:hover, button.hoverable:hover, input[type=button].hoverable:hover, input[type=submit].hoverable:hover {
+.button.hoverable:hover,
+button.hoverable:hover,
+input[type="button"].hoverable:hover,
+input[type="submit"].hoverable:hover,
+input[type="reset"].hoverable:hover {
     border-color: yellow;
     color: yellow;
 }
 
-.button:focus, button:focus, input[type=button]:focus, input[type=submit]:focus, .button.hoverable:focus, button.hoverable:focus, input[type=button].hoverable:focus, input[type=submit].hoverable:focus {
+.button:focus,
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+.button.hoverable:focus,
+button.hoverable:focus,
+input[type="button"].hoverable:focus,
+input[type="submit"].hoverable:focus,
+input[type="reset"].hoverable:focus {
     border-color: orange;
     color: orange;
 }

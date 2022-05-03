@@ -63,15 +63,10 @@ const main = function (game) {
             else {
                 yield textDisplayer.displayAsynchronously({
                     e: p1,
-                    text: "The door is open, ",
+                    text: "The door is open.",
                     delay: 0.05,
                 });
-                yield delayer.delay(0.4);
-                yield textDisplayer.displayAsynchronously({
-                    e: p1,
-                    text: " perhaps there is another clue in this room though...",
-                    delay: 0.05,
-                });
+                yield delayer.delay(1);
             }
             if (game.store.data.animatorQuartersLock1 === "CLOSED") {
                 p1.appendChild(el("br"));

@@ -2,6 +2,7 @@
 import { game, gameStoreInitData } from "./Game.js";
 
 import { delay } from "./asyncHelpers.js";
+import { PROGRAM_MODE } from "./mode.js";
 
 {
     // Getting a Reference to HTML elements
@@ -14,6 +15,12 @@ import { delay } from "./asyncHelpers.js";
     const nameInput = document.getElementById(
         "nameInput"
     ) as HTMLTextAreaElement;
+
+    // If we are on dev mode, insert a name in the name field to avoid having to type a name over and over again when testing
+
+    if (PROGRAM_MODE === "DEV") {
+        nameInput.value = "Frisk";
+    }
 
     // Attaching Event Listeners
     mainMenuButton?.addEventListener("click", (ev) => {
