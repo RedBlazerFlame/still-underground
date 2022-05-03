@@ -30,7 +30,7 @@ function formatAsTimeString(t: number) {
     if (totalDays > 0) res += `${prependLeadingZeroes(`${totalDays}`, 3)} : `;
     if (totalHours > 0) res += `${prependLeadingZeroes(`${hours}`, 2)} : `;
     res += `${prependLeadingZeroes(`${minutes}`, 2)} : `;
-    res += `${prependLeadingZeroes(`${seconds}`, 2)}`;
+    res += `${prependLeadingZeroes(`${seconds.toFixed(2)}`, 2)}`;
 
     return res;
 }
