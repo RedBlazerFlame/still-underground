@@ -2,7 +2,7 @@
 
 {
     let buttons: NodeListOf<HTMLElement> = document.querySelectorAll(
-        "button, input[type=button], input[type=submit]"
+        "button, input[type=button], input[type=submit], input[type=reset]"
     );
 
     buttons.forEach((button) => {

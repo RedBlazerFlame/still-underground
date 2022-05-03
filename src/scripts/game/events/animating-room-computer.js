@@ -140,8 +140,12 @@ const main = function (game) {
                 */
                 let answerInput = parseHTML(`<input class='margin-12px textarea' type='text' placeholder="Input the Name" form='controls' name="answer" id="answer">`)[0];
                 game.view.controls.element.appendChild(answerInput);
-                let submitButton = parseHTML(`<input type='submit' value='Submit ""' form='controls'>`)[0];
-                game.view.controls.element.appendChild(submitButton);
+                let group1 = parseHTML(`<fieldset form="controls"></fieldset>`)[0];
+                game.view.controls.element.appendChild(group1);
+                let resetButton = parseHTML(`<input class='margin-12px' type='reset' value='Clear' form='controls'>`)[0];
+                group1.appendChild(resetButton);
+                let submitButton = parseHTML(`<input class='margin-12px' type='submit' value='Submit ""' form='controls'>`)[0];
+                group1.appendChild(submitButton);
                 // Event Listeners
                 game.view.controls.addEventListener("submit", (ev) => {
                     let { answer } = getFormData(game.view.controls.element);

@@ -28,19 +28,35 @@
         <main class="window">
             <section class="title centered h1">Name Your Character</section>
             <section class="inputs centered h2">
-                <form id="inputs">
-                    <textarea
-                        name="nameInput"
-                        form="inputs"
-                        id="nameInput"
-                        placeholder="Name"
-                        class="textarea hoverable noresize"
-                        cols="30"
-                        rows="1"
-                    ></textarea>
-                    <p class="inputIndicator hidden" id="nameInputIndicator">
-                        Error
-                    </p>
+                <form id="inputs" class="centered">
+                    <fieldset form="inputs">
+                        <legend class="h3">Name</legend>
+                        <textarea
+                            name="nameInput"
+                            form="inputs"
+                            id="nameInput"
+                            placeholder="Name"
+                            class="textarea hoverable noresize"
+                            cols="30"
+                            rows="1"
+                        ></textarea>
+                        <p
+                            class="inputIndicator hidden"
+                            id="nameInputIndicator"
+                        >
+                            Error
+                        </p>
+                    </fieldset>
+                    <fieldset form="inputs">
+                        <input
+                            form="inputs"
+                            name="clear"
+                            id="clear"
+                            type="reset"
+                            value="Clear"
+                            class="hoverable"
+                        ></input>
+                    </fieldset>
                 </form>
             </section>
             <section class="disclaimer centered">

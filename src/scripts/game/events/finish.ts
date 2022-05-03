@@ -6,6 +6,7 @@ import { EventHandler } from "../events.js";
 
 const main: EventHandler = async function (game: GameObject) {
     // Preprocessing
+    game.view.navigator.hide();
 
     // TODO Storing Best Times
 

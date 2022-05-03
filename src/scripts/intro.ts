@@ -27,28 +27,41 @@ import { PROGRAM_MODE } from "./mode.js";
         window.location.replace("/");
     });
 
-    startGameButton?.addEventListener("click", async (ev) => {
-        let data = Object.fromEntries(new FormData(nameForm).entries());
-        let { nameInput: name } = data as { nameInput: string };
-        console.log(name);
+    nameInput.addEventListener("blur", (ev) => {
+        let name = (ev.target as HTMLTextAreaElement).value;
 
         if (name === "") {
             // The inputted name was empty. Raise an error
             nameInputIndicator.textContent = "Please Input a Name";
             nameInputIndicator.classList.add("error");
             nameInputIndicator.classList.remove("hidden");
-            await delay(2);
-            nameInputIndicator.classList.add("hidden");
-            nameInputIndicator.classList.remove("error");
         } else if (name.length > 30) {
             // The inputted name was too long. Raise an error
             nameInputIndicator.textContent = "Please Input a Shorter Name";
-            nameInput.value = "";
             nameInputIndicator.classList.add("error");
             nameInputIndicator.classList.remove("hidden");
-            await delay(2);
-            nameInputIndicator.classList.add("hidden");
-            nameInputIndicator.classList.remove("error");
+        }
+    });
+
+    nameInput.addEventListener("focus", (ev) => {
+        nameInputIndicator.classList.add("hidden");
+        nameInputIndicator.classList.remove("error");
+    });
+
+    startGameButton?.addEventListener("click", async (ev) => {
+        let data = Object.fromEntries(new FormData(nameForm).entries());
+        let { nameInput: name } = data as { nameInput: string };
+
+        if (name === "") {
+            // The inputted name was empty. Raise an error
+            nameInputIndicator.textContent = "Please Input a Name";
+            nameInputIndicator.classList.add("error");
+            nameInputIndicator.classList.remove("hidden");
+        } else if (name.length > 30) {
+            // The inputted name was too long. Raise an error
+            nameInputIndicator.textContent = "Please Input a Shorter Name";
+            nameInputIndicator.classList.add("error");
+            nameInputIndicator.classList.remove("hidden");
         } else {
             // The inputted name is valid. Set this as the name of the user and start the game
             game.store.set(JSON.parse(JSON.stringify(gameStoreInitData))); // Ensuring that the progress is reset (to prevent cheating*)

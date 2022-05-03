@@ -13,6 +13,7 @@ import { appendChildren, parseHTML } from "../../domHelpers.js";
 const main = function (game) {
     return __awaiter(this, void 0, void 0, function* () {
         // Preprocessing
+        game.view.navigator.hide();
         // TODO Storing Best Times
         // Clearing LocalStorage
         game.store.delete();

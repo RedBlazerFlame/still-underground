@@ -169,11 +169,21 @@ const main: EventHandler = async function (game: GameObject) {
 
             game.view.controls.element.appendChild(answerInput);
 
-            let submitButton = parseHTML(
-                `<input type='submit' value='Submit ""' form='controls'>`
+            let group1 = parseHTML(`<fieldset form="controls"></fieldset>`)[0];
+
+            game.view.controls.element.appendChild(group1);
+
+            let resetButton = parseHTML(
+                `<input class='margin-12px' type='reset' value='Clear' form='controls'>`
             )[0] as HTMLInputElement;
 
-            game.view.controls.element.appendChild(submitButton);
+            group1.appendChild(resetButton);
+
+            let submitButton = parseHTML(
+                `<input class='margin-12px' type='submit' value='Submit ""' form='controls'>`
+            )[0] as HTMLInputElement;
+
+            group1.appendChild(submitButton);
 
             // Event Listeners
 

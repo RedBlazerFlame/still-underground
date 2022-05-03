@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 // Imports
 import { game, gameStoreInitData } from "./Game.js";
-import { delay } from "./asyncHelpers.js";
 import { PROGRAM_MODE } from "./mode.js";
 {
     // Getting a Reference to HTML elements
@@ -26,28 +25,39 @@ import { PROGRAM_MODE } from "./mode.js";
     mainMenuButton === null || mainMenuButton === void 0 ? void 0 : mainMenuButton.addEventListener("click", (ev) => {
         window.location.replace("/");
     });
-    startGameButton === null || startGameButton === void 0 ? void 0 : startGameButton.addEventListener("click", (ev) => __awaiter(void 0, void 0, void 0, function* () {
-        let data = Object.fromEntries(new FormData(nameForm).entries());
-        let { nameInput: name } = data;
-        console.log(name);
+    nameInput.addEventListener("blur", (ev) => {
+        let name = ev.target.value;
         if (name === "") {
             // The inputted name was empty. Raise an error
             nameInputIndicator.textContent = "Please Input a Name";
             nameInputIndicator.classList.add("error");
             nameInputIndicator.classList.remove("hidden");
-            yield delay(2);
-            nameInputIndicator.classList.add("hidden");
-            nameInputIndicator.classList.remove("error");
         }
         else if (name.length > 30) {
             // The inputted name was too long. Raise an error
             nameInputIndicator.textContent = "Please Input a Shorter Name";
-            nameInput.value = "";
             nameInputIndicator.classList.add("error");
             nameInputIndicator.classList.remove("hidden");
-            yield delay(2);
-            nameInputIndicator.classList.add("hidden");
-            nameInputIndicator.classList.remove("error");
+        }
+    });
+    nameInput.addEventListener("focus", (ev) => {
+        nameInputIndicator.classList.add("hidden");
+        nameInputIndicator.classList.remove("error");
+    });
+    startGameButton === null || startGameButton === void 0 ? void 0 : startGameButton.addEventListener("click", (ev) => __awaiter(void 0, void 0, void 0, function* () {
+        let data = Object.fromEntries(new FormData(nameForm).entries());
+        let { nameInput: name } = data;
+        if (name === "") {
+            // The inputted name was empty. Raise an error
+            nameInputIndicator.textContent = "Please Input a Name";
+            nameInputIndicator.classList.add("error");
+            nameInputIndicator.classList.remove("hidden");
+        }
+        else if (name.length > 30) {
+            // The inputted name was too long. Raise an error
+            nameInputIndicator.textContent = "Please Input a Shorter Name";
+            nameInputIndicator.classList.add("error");
+            nameInputIndicator.classList.remove("hidden");
         }
         else {
             // The inputted name is valid. Set this as the name of the user and start the game
