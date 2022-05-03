@@ -1,10 +1,18 @@
+import { PROGRAM_MODE, SPEEDUP_FACTOR } from "./mode.js";
+
 // This function will delay execution of an asynchronous function by a specified number of seconds
 export const delay = (s: number) =>
-    new Promise((res) =>
-        setTimeout(() => {
-            res(undefined);
-        }, s * 1000)
-    );
+    new Promise((res) => {
+        if (PROGRAM_MODE === "PROD") {
+            setTimeout(() => {
+                res(undefined);
+            }, s * 1000);
+        } else {
+            setTimeout(() => {
+                res(undefined);
+            }, (s * 1000) / SPEEDUP_FACTOR);
+        }
+    });
 
 export class AsyncDelayer {
     // Properties

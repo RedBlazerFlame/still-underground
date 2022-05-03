@@ -7,10 +7,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { PROGRAM_MODE, SPEEDUP_FACTOR } from "./mode.js";
 // This function will delay execution of an asynchronous function by a specified number of seconds
-export const delay = (s) => new Promise((res) => setTimeout(() => {
-    res(undefined);
-}, s * 1000));
+export const delay = (s) => new Promise((res) => {
+    if (PROGRAM_MODE === "PROD") {
+        setTimeout(() => {
+            res(undefined);
+        }, s * 1000);
+    }
+    else {
+        setTimeout(() => {
+            res(undefined);
+        }, (s * 1000) / SPEEDUP_FACTOR);
+    }
+});
 export class AsyncDelayer {
     // Constructor
     constructor() {

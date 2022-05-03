@@ -69,7 +69,7 @@ const main = function (game) {
                 yield delayer.delay(0.4);
                 yield textDisplayer.displayAsynchronously({
                     e: p1,
-                    text: " but you decide to stay in the room for now.",
+                    text: " perhaps there is another clue in this room though...",
                     delay: 0.05,
                 });
             }

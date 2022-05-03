@@ -48,6 +48,11 @@ export class Store<T extends Object> {
         // This function will be implemented in subclasses
     }
 
+    public delete() {
+        // This function will delete the localStorage entry
+        localStorage.removeItem(this.key);
+    }
+
     // Constructor
     constructor({ targetObj, key }: { targetObj: T; key: string }) {
         this.key = key;

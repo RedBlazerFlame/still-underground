@@ -99,7 +99,7 @@ const main = function (game) {
         game.view.navigator.showPrev();
         yield new Promise((r) => {
             game.view.controls.addEventListener("submit", (ev) => {
-                // TODO animating-room-1
+                // animating-room-1
                 game.dispatcher.dispatch({
                     event: "animating-room-1",
                 });

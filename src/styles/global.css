@@ -8,6 +8,7 @@
 @import "button.component.css";
 @import "textarea.component.css";
 @import "inputIndicator.component.css";
+@import "select.component.css";
 
 /* Styles for All Elements */
 
@@ -118,6 +119,26 @@ a {
     max-width: 20vw;
 }
 
+.max-width-40vw {
+    max-width: 40vw;
+}
+
+.max-width-60vw {
+    max-width: 60vw;
+}
+
+.width-20vw {
+    width: 20vw;
+}
+
+.width-40vw {
+    width: 40vw;
+}
+
+.width-60vw {
+    width: 60vw;
+}
+
 .h1, h1 {
     font-size: 3rem;
 }
@@ -148,4 +169,8 @@ a {
 
 .nodisplay {
     display: none;
+}
+
+.red {
+    color: red;
 }

@@ -53,4 +53,8 @@ export class Store {
     proxify() {
         // This function will be implemented in subclasses
     }
+    delete() {
+        // This function will delete the localStorage entry
+        localStorage.removeItem(this.key);
+    }
 }

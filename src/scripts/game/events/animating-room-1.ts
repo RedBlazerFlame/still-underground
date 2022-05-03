@@ -75,7 +75,7 @@ const main: EventHandler = async function (game: GameObject) {
 
             await textDisplayer.displayAsynchronously({
                 e: p1,
-                text: " but you decide to stay in the room for now.",
+                text: " perhaps there is another clue in this room though...",
                 delay: 0.05,
             });
         }

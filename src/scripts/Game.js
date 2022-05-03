@@ -24,6 +24,12 @@ export class ElementController {
     show() {
         this.element.classList.remove("nodisplay");
     }
+    center() {
+        this.element.classList.add("centered");
+    }
+    uncenter() {
+        this.element.classList.remove("centered");
+    }
     addEventListener(type, fn, opt) {
         this.eventListeners.push([type, fn, opt]);
         this.element.addEventListener(type, fn, opt);
@@ -107,6 +113,7 @@ export const view = {
         this.navigator.show();
         this.navigator.showNext();
         this.navigator.showPrev();
+        this.controls.center();
     },
 };
 export class GameStore extends Store {
@@ -186,8 +193,7 @@ class EventDispatcher {
                 }
                 if (((_e = currentEvent.makeDelaysInstant) !== null && _e !== void 0 ? _e : true) &&
                     currentEventCallback !== undefined) {
-                    if (this.__gameObject.store.data.visits[currentEvent.event] ===
-                        1) {
+                    if (this.__gameObject.store.data.visits[currentEvent.event] <= 1) {
                         textDisplayer.instant(false);
                         delayer.instant(false);
                     }

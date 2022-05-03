@@ -1,0 +1,16 @@
+select {
+    background-color: black;
+    border: 4px solid white;
+    color: white;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+}
+
+select.hoverable:hover {
+    border-color: yellow;
+    color: yellow;
+}
+
+select:focus {
+    border-color: orange;
+}

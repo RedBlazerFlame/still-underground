@@ -30,6 +30,14 @@ export class ElementController<T extends HTMLElement = HTMLElement> {
         this.element.classList.remove("nodisplay");
     }
 
+    public center(): void {
+        this.element.classList.add("centered");
+    }
+
+    public uncenter(): void {
+        this.element.classList.remove("centered");
+    }
+
     public addEventListener(
         type: keyof HTMLElementEventMap,
         fn: (ev: Event) => any,
@@ -173,6 +181,7 @@ export const view: ViewControllers = {
         this.navigator.show();
         this.navigator.showNext();
         this.navigator.showPrev();
+        this.controls.center();
     },
 };
 
@@ -306,8 +315,7 @@ class EventDispatcher {
                 currentEventCallback !== undefined
             ) {
                 if (
-                    this.__gameObject.store.data.visits[currentEvent.event] ===
-                    1
+                    this.__gameObject.store.data.visits[currentEvent.event] <= 1
                 ) {
                     textDisplayer.instant(false);
                     delayer.instant(false);
