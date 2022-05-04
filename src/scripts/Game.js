@@ -145,9 +145,9 @@ export const gameStoreInitData = {
     timeStart: 0,
     event: "start-1",
     animatingRoomDoorState: "CLOSED",
+    recordingStudioDoorState: "CLOSED",
     animatorQuartersLock1: "CLOSED",
-    animatorQuartersLock2: "CLOSED",
-    animatorQuartersLock3: "CLOSED",
+    animatorQuartersLocks2And3: "CLOSED",
     ending: null,
     visits: {
         "start-1": 1,

@@ -196,9 +196,9 @@ export type GameStoreData = {
     timeStart: number;
     event: string;
     animatingRoomDoorState: DoorState;
+    recordingStudioDoorState: DoorState;
     animatorQuartersLock1: DoorState;
-    animatorQuartersLock2: DoorState;
-    animatorQuartersLock3: DoorState;
+    animatorQuartersLocks2And3: DoorState;
     ending: null | "BAD" | "NEUTRAL" | "GOOD";
     visits: {
         [key: string]: number;
@@ -237,9 +237,9 @@ export const gameStoreInitData: GameStoreData = {
     timeStart: 0,
     event: "start-1",
     animatingRoomDoorState: "CLOSED",
+    recordingStudioDoorState: "CLOSED",
     animatorQuartersLock1: "CLOSED",
-    animatorQuartersLock2: "CLOSED",
-    animatorQuartersLock3: "CLOSED",
+    animatorQuartersLocks2And3: "CLOSED",
     ending: null,
     visits: {
         "start-1": 1,
