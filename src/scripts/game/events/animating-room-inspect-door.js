@@ -52,8 +52,12 @@ const main = function (game) {
                 let walkThroughDoor = parseHTML("<input class='margin-12px' type='button' form='controls' value='Walk through the Door'>")[0];
                 game.view.controls.element.appendChild(walkThroughDoor);
                 walkThroughDoor.addEventListener("click", (ev) => {
+                    // TODO Recording Studio
+                    // game.dispatcher.dispatch({
+                    //     event: "recording-studio-1",
+                    // });
                     game.dispatcher.dispatch({
-                        event: "recording-studio-1",
+                        event: "project-proposal-phase-ii-ending",
                     });
                     r(undefined);
                 });

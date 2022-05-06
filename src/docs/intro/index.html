@@ -12,7 +12,7 @@
         />
         <meta name="keywords" content="K, potassium, computer science" />
         <meta name="date" content="30/04/2022" />
-        <meta name="revised" content="30/04/2022" />
+        <meta name="revised" content="06/05/2022" />
 
         <!-- Scripts -->
         <script type="module" src="/scripts/global.js" defer></script>
@@ -25,12 +25,20 @@
         <title>Still Underground | Intro</title>
     </head>
     <body>
+
+        <!-- Main Window -->
         <main class="window">
+
+            <!-- Instructions/Page Name -->
             <section class="title centered h1">Name Your Character</section>
+
+            <!-- Inputs -->
             <section class="inputs centered h2">
                 <form id="inputs" class="centered">
                     <fieldset form="inputs">
                         <legend class="h3">Name</legend>
+
+                        <!-- Name Input -->
                         <textarea
                             name="nameInput"
                             form="inputs"
@@ -40,6 +48,9 @@
                             cols="30"
                             rows="1"
                         ></textarea>
+
+                        <!-- Name Indicator -->
+                        <!-- This will indicate if there are any errors with the input -->
                         <p
                             class="inputIndicator hidden"
                             id="nameInputIndicator"
@@ -47,6 +58,8 @@
                             Error
                         </p>
                     </fieldset>
+
+                    <!-- Reset Button -->
                     <fieldset form="inputs">
                         <input
                             form="inputs"
@@ -59,14 +72,20 @@
                     </fieldset>
                 </form>
             </section>
+
+            <!-- Disclaimer -->
             <section class="disclaimer centered">
                 <i
                     >Disclaimer: This game is a work of fiction. The basement
                     likely does not exist in real life.</i
                 >
             </section>
+
+            <!-- Other Controls -->
             <section class="startGame centered">
                 <form id="controls">
+
+                    <!-- Go Back to the Main Menu -->
                     <input
                         type="button"
                         name="mainMenuButton"
@@ -75,6 +94,8 @@
                         id="mainMenuButton"
                         form="controls"
                     />
+
+                    <!-- Begin the Game -->
                     <input
                         type="button"
                         name="startGameButton"

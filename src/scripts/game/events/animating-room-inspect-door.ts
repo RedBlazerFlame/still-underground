@@ -59,8 +59,13 @@ const main: EventHandler = async function (game: GameObject) {
             game.view.controls.element.appendChild(walkThroughDoor);
 
             walkThroughDoor.addEventListener("click", (ev) => {
+                // TODO Recording Studio
+                // game.dispatcher.dispatch({
+                //     event: "recording-studio-1",
+                // });
+
                 game.dispatcher.dispatch({
-                    event: "recording-studio-1",
+                    event: "project-proposal-phase-ii-ending",
                 });
 
                 r(undefined);

@@ -1,2 +1,2 @@
-export const PROGRAM_MODE = "DEV";
+export const PROGRAM_MODE = "PROD";
 export const SPEEDUP_FACTOR = 6;

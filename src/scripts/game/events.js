@@ -12,6 +12,7 @@ import openAnimatingRoomDoor1 from "./events/open-animating-room-door-1.js";
 import badEnding from "./events/bad-ending.js";
 import finish from "./events/finish.js";
 import openAnimatorQuartersLock1 from "./events/open-animator-quarters-lock-1.js";
+import projectProposalPhaseTwoEnding from "./events/project-proposal-phase-ii-ending.js";
 // Creating the Event Handler Map
 export const eventHandlerMap = new Map([
     ["start-1", start1],
@@ -25,4 +26,5 @@ export const eventHandlerMap = new Map([
     ["bad-ending", badEnding],
     ["finish", finish],
     ["open-animator-quarters-lock-1", openAnimatorQuartersLock1],
+    ["project-proposal-phase-ii-ending", projectProposalPhaseTwoEnding],
 ]);

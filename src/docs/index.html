@@ -9,7 +9,7 @@
         <meta name="description" content="Can you escape Eve's Basement?" />
         <meta name="keywords" content="K, potassium, computer science" />
         <meta name="date" content="29/04/2022" />
-        <meta name="revised" content="29/04/2022" />
+        <meta name="revised" content="06/05/2022" />
 
         <!-- Scripts -->
         <script type="module" src="/scripts/global.js" defer></script>
@@ -22,15 +22,22 @@
         <title>Still Underground</title>
     </head>
     <body>
+        <!-- Main Window -->
         <main class="window">
+            <!-- Hitotsume Flashing Icon -->
             <section class="icon centered">
                 <img src="images/icon.png" alt="" />
             </section>
+
+            <!-- Game Title -->
             <section class="title h1 centered">
                 <img src="images/logo.png" alt="Still Underground" />
             </section>
+
+            <!-- Options -->
             <section class="options h2 centered">
                 <form class="centered-and-spaced-between" id="mainMenuOptions">
+                    <!-- Start a New Game -->
                     <input
                         type="button"
                         name="newGame"
@@ -39,6 +46,8 @@
                         class="button hoverable"
                         form="mainMenuOptions"
                     />
+
+                    <!-- Continue the Game -->
                     <input
                         type="button"
                         name="continue"
@@ -47,6 +56,8 @@
                         class="button hoverable nodisplay"
                         form="mainMenuOptions"
                     />
+
+                    <!-- Go to the Leaderboard -->
                     <input
                         type="button"
                         name="leaderboard"
@@ -55,6 +66,8 @@
                         class="button hoverable"
                         form="mainMenuOptions"
                     />
+
+                    <!-- Go to the Acknowledgements Page -->
                     <input
                         type="button"
                         name="acknowledgements"
